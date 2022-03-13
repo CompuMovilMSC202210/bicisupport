@@ -4,4 +4,18 @@
     <string name="userText">Usuario</string>
     <string name="passwordText">Contraseña</string>
     <string name="goToRegister">No tienes cuenta? <u>Registrate aquí</u></string>
+
+    <!--Strings activity detalle aliado-->
+    <string name="detalleAliado_nombreAliado">Aliado X</string>
+    <string name="detalleAliado_tipoAliado">TIpo aliado</string>
+    <string name="detalleAliado_direccion">Direccion aliado</string>
+    <string name="detalleAliado_contactar">Contactar</string>
+    <string name="detalleAliado_imagen">Imagen aliado</string>
+    <string name="detalleAliado_serviciosPrestados">Servicios prestados:</string>
+    <string name="detalleAliado_ubicacionMapa">Ubicacion en mapa:</string>
+
+    <!--Strings activity lista aliados-->
+    <string name="listaAliados_cercanos">Mas cercanos</string>
+    <string name="listaAliados_menorPrecio">Menor precio</string>
+    <string name="listaAliados_mejorCalificados">Mejor calificados</string>
 </resources>
