@@ -1,21 +1,22 @@
-package com.javeriana.bicisupport;
+package com.javeriana.bicisupport.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 
+import com.javeriana.bicisupport.R;
+
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     Button loginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         Objects.requireNonNull(getSupportActionBar()).hide();
 
