@@ -1,4 +1,4 @@
-package com.javeriana.bicisupport.activities;
+package com.javeriana.bicisupport.adapters;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.javeriana.bicisupport.R;
+import com.javeriana.bicisupport.activities.DetalleAliadoActivity;
+import com.javeriana.bicisupport.activities.ListaResenasAliadoActivity;
 
 public class ListaAliadosAdapter extends ArrayAdapter<String> {
 

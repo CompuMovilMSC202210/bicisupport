@@ -1,4 +1,4 @@
-package com.javeriana.bicisupport.activities;
+package com.javeriana.bicisupport.adapters;
 
 import android.app.Activity;
 import android.view.LayoutInflater;

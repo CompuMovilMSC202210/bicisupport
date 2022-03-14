@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.ListView;
 
 import com.javeriana.bicisupport.R;
+import com.javeriana.bicisupport.adapters.ListaResenasAliadoAdapter;
 
 public class ListaResenasAliadoActivity extends AppCompatActivity {
 

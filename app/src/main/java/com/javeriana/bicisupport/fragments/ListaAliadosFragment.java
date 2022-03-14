@@ -1,7 +1,5 @@
 package com.javeriana.bicisupport.fragments;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.Fragment;
@@ -13,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.javeriana.bicisupport.R;
-import com.javeriana.bicisupport.activities.ListaAliadosAdapter;
+import com.javeriana.bicisupport.adapters.ListaAliadosAdapter;
 
 import java.util.Objects;
 
