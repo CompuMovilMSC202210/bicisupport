@@ -59,7 +59,7 @@
         android:layout_marginTop="15dp"
         android:background="@drawable/white_button"
         android:text="@string/add_photo"
-        android:textColor="#00239E"
+        android:textColor="@color/project_blue"
         android:textSize="13sp"
         app:backgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
@@ -183,7 +183,7 @@
                 android:layout_marginEnd="60dp"
                 android:background="@drawable/white_button"
                 android:text="@string/end_register"
-                android:textColor="#00239E"
+                android:textColor="@color/project_blue"
                 android:textStyle="bold"
                 app:backgroundTint="@color/white" />
         </LinearLayout>

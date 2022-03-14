@@ -98,7 +98,7 @@
         android:layout_marginEnd="60dp"
         android:background="@drawable/white_button"
         android:text="@string/login_text"
-        android:textColor="#00239E"
+        android:textColor="@color/project_blue"
         android:textStyle="bold"
         app:backgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
