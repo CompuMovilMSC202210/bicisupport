@@ -16,7 +16,7 @@
             android:name=".fragments.ListaAliadosFragment"
             android:exported="false" />
         <activity
-            android:name=".activities.DetalleAliadoActivity"
+            android:name=".activities.DetalleAliadoFragment"
             android:exported="false" />
         <activity
             android:name=".activities.BicycleRegisterActivity"

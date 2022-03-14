@@ -9,9 +9,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.fragment.app.FragmentTransaction;
+
 import com.javeriana.bicisupport.R;
-import com.javeriana.bicisupport.activities.DetalleAliadoActivity;
+import com.javeriana.bicisupport.activities.DetalleAliadoFragment;
+import com.javeriana.bicisupport.activities.HomeActivity;
 import com.javeriana.bicisupport.activities.ListaResenasAliadoActivity;
+import com.javeriana.bicisupport.fragments.ListaAliadosFragment;
 
 public class ListaAliadosAdapter extends ArrayAdapter<String> {
 
@@ -50,7 +54,11 @@ public class ListaAliadosAdapter extends ArrayAdapter<String> {
         botonDetalle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                parent.getContext().startActivity(new Intent(parent.getContext(), DetalleAliadoActivity.class));
+                DetalleAliadoFragment detalleAliadoFragment = new DetalleAliadoFragment();
+                FragmentTransaction fragmentTransaction =  ((HomeActivity)context).getSupportFragmentManager().beginTransaction();
+
+                fragmentTransaction.replace(R.id.fragmentContainerView, detalleAliadoFragment);
+                fragmentTransaction.commit();
             }
         });
 
