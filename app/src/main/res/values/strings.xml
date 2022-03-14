@@ -15,4 +15,14 @@
     <string name="email">Email</string>
     <string name="password">Contraseña</string>
     <string name="repeat_password">Repetir contraseña</string>
+    <string name="brand">Marca</string>
+    <string name="color">Color</string>
+    <string name="model">Modelo</string>
+    <string name="type">Tipo</string>
+    <string name="end_register">Finalizar registro</string>
+    <string-array name="example">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
 </resources>
