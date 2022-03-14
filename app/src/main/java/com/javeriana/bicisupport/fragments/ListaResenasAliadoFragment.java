@@ -1,14 +1,21 @@
-package com.javeriana.bicisupport.activities;
+package com.javeriana.bicisupport.fragments;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.text.HtmlCompat;
+import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.javeriana.bicisupport.R;
 import com.javeriana.bicisupport.adapters.ListaResenasAliadoAdapter;
 
-public class ListaResenasAliadoActivity extends AppCompatActivity {
+import java.util.Objects;
+
+public class ListaResenasAliadoFragment extends Fragment {
 
     ListView listaResenas;
 
@@ -34,14 +41,31 @@ public class ListaResenasAliadoActivity extends AppCompatActivity {
             "Resena 9", "Resena 10",
     };
 
+    public ListaResenasAliadoFragment() {
+
+    }
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lista_resenas_aliado);
 
-        ListaResenasAliadoAdapter adapterListaResenas = new ListaResenasAliadoAdapter(this, nombreUsuarios, fechaResenas, descripcionResenas);
-        listaResenas = findViewById(R.id.listaResenasAliado);
-        listaResenas.setAdapter(adapterListaResenas);
+
     }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        View root = inflater.inflate(R.layout.fragment_lista_resenas_aliado, container, false);
+
+        Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setTitle(HtmlCompat.fromHtml("<font color='#00239E'>Reseñas</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+
+        ListaResenasAliadoAdapter adapterListaResenas = new ListaResenasAliadoAdapter(getActivity(), nombreUsuarios, fechaResenas, descripcionResenas);
+        listaResenas = root.findViewById(R.id.listaResenasAliado);
+        listaResenas.setAdapter(adapterListaResenas);
+
+        return root;
+
+    }
+
 }

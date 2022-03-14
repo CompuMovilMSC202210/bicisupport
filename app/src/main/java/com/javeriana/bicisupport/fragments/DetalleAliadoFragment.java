@@ -1,4 +1,4 @@
-package com.javeriana.bicisupport.activities;
+package com.javeriana.bicisupport.fragments;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.text.HtmlCompat;

@@ -21,7 +21,7 @@ public class ListaResenasAliadoAdapter extends ArrayAdapter<String> {
 
     public ListaResenasAliadoAdapter(Activity context, String[] nombreUsuarios,
                                      String[]fecharesenas, String[] descripcionResena) {
-        super(context, R.layout.activity_lista_resenas_aliado, nombreUsuarios);
+        super(context, R.layout.fragment_lista_resenas_aliado, nombreUsuarios);
 
         this.context = context;
         this.nombreUsuarios = nombreUsuarios;
