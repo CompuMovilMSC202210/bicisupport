@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.javeriana.bicisupport.R;
 
+import java.util.Objects;
+
 public class BicycleRegisterActivity extends AppCompatActivity {
 
     Button finish;
@@ -16,6 +18,8 @@ public class BicycleRegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bicycle_register);
+
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         finish = findViewById(R.id.finishButton);
 

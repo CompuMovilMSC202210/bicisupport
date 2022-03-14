@@ -26,6 +26,7 @@
     <string name="bici_details">Ver datos de la bici</string>
     <string name="ver_novedades">Ver novedades</string>
     <string name="logout">Cerrar sesión</string>
+    <string name="home">Home</string>
     <string-array name="example">
         <item>1</item>
         <item>2</item>

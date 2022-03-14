@@ -1,6 +1,11 @@
 package com.javeriana.bicisupport.activities;
 
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +13,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.javeriana.bicisupport.R;
 import com.javeriana.bicisupport.fragments.ProfileFragment;
+
+import java.util.Objects;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -17,6 +24,8 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(Color.WHITE));
 
         assistant = findViewById(R.id.assistantButton);
         help = findViewById(R.id.helpButton);
@@ -32,5 +41,18 @@ public class HomeActivity extends AppCompatActivity {
 
             fragmentTransaction.replace(R.id.fragmentContainerView, profileFragment);
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.map_navigation, menu);
+        return true;
+    }
+
+    public void onClickMap(MenuItem item) {
+        ProfileFragment profileFragment = new ProfileFragment();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+
+        fragmentTransaction.replace(R.id.fragmentContainerView, profileFragment);
     }
 }
