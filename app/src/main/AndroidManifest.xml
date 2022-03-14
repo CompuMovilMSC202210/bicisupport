@@ -13,7 +13,7 @@
             android:name=".activities.ListaResenasAliadoActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.ListaAliadosActivity"
+            android:name=".fragments.ListaAliadosFragment"
             android:exported="false" />
         <activity
             android:name=".activities.DetalleAliadoActivity"

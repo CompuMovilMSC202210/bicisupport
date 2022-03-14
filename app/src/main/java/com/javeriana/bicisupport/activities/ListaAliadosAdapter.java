@@ -21,7 +21,7 @@ public class ListaAliadosAdapter extends ArrayAdapter<String> {
     public ListaAliadosAdapter(Activity context, String[] nombreAliados,
                                String[] direccionAliados, String[] descripcionesAliados) {
 
-        super(context, R.layout.activity_lista_aliados, nombreAliados);
+        super(context, R.layout.fragment_lista_aliados, nombreAliados);
 
         this.context = context;
         this.nombreAliados = nombreAliados;

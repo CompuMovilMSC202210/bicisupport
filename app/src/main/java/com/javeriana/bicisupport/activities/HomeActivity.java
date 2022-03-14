@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.javeriana.bicisupport.R;
+import com.javeriana.bicisupport.fragments.ListaAliadosFragment;
 import com.javeriana.bicisupport.fragments.ProfileFragment;
 
 import java.util.Objects;
@@ -32,7 +33,13 @@ public class HomeActivity extends AppCompatActivity {
         profile = findViewById(R.id.personButton);
         agreement = findViewById(R.id.agreementButton);
 
-        agreement.setOnClickListener(view -> System.out.println("Agreement clicked"));
+        agreement.setOnClickListener(view -> {
+            ListaAliadosFragment aliadosFragment = new ListaAliadosFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+
+            fragmentTransaction.replace(R.id.fragmentContainerView, aliadosFragment);
+            fragmentTransaction.commit();
+        });
         help.setOnClickListener(view -> System.out.println("Help clicked"));
         assistant.setOnClickListener(view -> System.out.println("Assistant clicked"));
         profile.setOnClickListener(view -> {
