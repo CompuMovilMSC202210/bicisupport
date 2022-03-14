@@ -18,9 +18,6 @@ public class ListaAliadosAdapter extends ArrayAdapter<String> {
     private String[] direccionAliados;
     private String[] descripcionesAliados;
 
-    Button botonDetalle;
-
-
     public ListaAliadosAdapter(Activity context, String[] nombreAliados,
                                String[] direccionAliados, String[] descripcionesAliados) {
 
@@ -38,10 +35,11 @@ public class ListaAliadosAdapter extends ArrayAdapter<String> {
         LayoutInflater inflater=context.getLayoutInflater();
         View rowView=inflater.inflate(R.layout.vista_aliado_lista, null,true);
 
-        TextView nombreAliadoText =  rowView.findViewById(R.id.listaAliados_nombreAliado);
+        TextView nombreAliadoText =  rowView.findViewById(R.id.listaResenas_nombreUsuario);
         TextView direccionAliadoText =  rowView.findViewById(R.id.listaAliados_direccionAliado);
-        TextView descripcionAliadoText =  rowView.findViewById(R.id.listaAliados_descripcionAliado);
-        botonDetalle = rowView.findViewById(R.id.listaAliado_contactar);
+        TextView descripcionAliadoText =  rowView.findViewById(R.id.listaResenas_descripcionResena);
+        Button botonDetalle = rowView.findViewById(R.id.listaAliado_Detalle);
+        Button botonResenas = rowView.findViewById(R.id.listaAliado_Resenas);
 
         nombreAliadoText.setText(nombreAliados[position]);
         direccionAliadoText.setText(direccionAliados[position]);
@@ -51,6 +49,13 @@ public class ListaAliadosAdapter extends ArrayAdapter<String> {
             @Override
             public void onClick(View view) {
                 parent.getContext().startActivity(new Intent(parent.getContext(), DetalleAliadoActivity.class));
+            }
+        });
+
+        botonResenas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                parent.getContext().startActivity(new Intent(parent.getContext(), ListaResenasAliadoActivity.class));
             }
         });
 

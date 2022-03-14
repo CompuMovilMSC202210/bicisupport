@@ -27,7 +27,7 @@ public class ListaAliadosActivity extends AppCompatActivity {
     String[] descripciones={
             "descripcion 1", "descripcion 2",
             "descripcion 3", "descripcion 4",
-            "descripcion 5"
+            "descripcion 5 "
     };
 
 

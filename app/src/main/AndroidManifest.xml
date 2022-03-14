@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Bicisupport">
         <activity
+            android:name=".activities.ListaResenasAliadoActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.ListaAliadosActivity"
             android:exported="false" />
         <activity
