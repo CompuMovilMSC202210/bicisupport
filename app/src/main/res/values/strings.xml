@@ -1,7 +1,18 @@
 <resources>
     <string name="app_name">BiciSupport</string>
-    <string name="LoginText">Iniciar Sesión</string>
-    <string name="userText">Usuario</string>
-    <string name="passwordText">Contraseña</string>
-    <string name="goToRegister">No tienes cuenta? <u>Registrate aquí</u></string>
+    <string name="login_text">Iniciar Sesión</string>
+    <string name="user_text">Usuario</string>
+    <string name="password_text">Contraseña</string>
+    <string name="go_to_register">No tienes cuenta? <u>Registrate aquí</u></string>
+    <string name="go_to_login">Ya tienes cuenta? <u>Inicia sesión aquí</u></string>
+    <string name="register_text">Registro</string>
+    <string name="user_data">Datos del usuario</string>
+    <string name="bici_data">Datos de la bici</string>
+    <string name="add_photo">Agregar foto</string>
+    <string name="name">Nombre</string>
+    <string name="user">Usuario</string>
+    <string name="next">Siguiente</string>
+    <string name="email">Email</string>
+    <string name="password">Contraseña</string>
+    <string name="repeat_password">Repetir contraseña</string>
 </resources>
