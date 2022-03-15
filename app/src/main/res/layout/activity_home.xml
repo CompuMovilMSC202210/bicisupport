@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="0dp"
+    tools:context=".activities.HomeActivity">
+
+    <ImageButton
+        android:id="@+id/assistantButton"
+        android:layout_width="60dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/hover_button_image"
+        android:scaleType="fitCenter"
+        android:src="@drawable/assistant"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/separator1"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/separator1"
+        android:layout_width="20dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/personButton"
+        app:layout_constraintStart_toEndOf="@id/assistantButton"
+        app:srcCompat="@drawable/separator" />
+
+    <ImageButton
+        android:id="@+id/personButton"
+        android:layout_width="60dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/hover_button_image"
+        android:scaleType="fitCenter"
+        android:src="@drawable/person"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/separator2"
+        app:layout_constraintStart_toEndOf="@id/separator1" />
+
+    <ImageView
+        android:id="@+id/separator2"
+        android:layout_width="20dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/agreementButton"
+        app:layout_constraintStart_toEndOf="@+id/personButton"
+        app:srcCompat="@drawable/separator" />
+
+    <ImageButton
+        android:id="@+id/agreementButton"
+        android:layout_width="60dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/hover_button_image"
+        android:scaleType="fitCenter"
+        android:src="@drawable/agreement"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/separator3"
+        app:layout_constraintStart_toEndOf="@id/separator2" />
+
+    <ImageView
+        android:id="@+id/separator3"
+        android:layout_width="20dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/helpButton"
+        app:layout_constraintStart_toEndOf="@+id/agreementButton"
+        app:srcCompat="@drawable/separator" />
+
+    <ImageButton
+        android:id="@+id/helpButton"
+        android:layout_width="60dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/hover_button_image"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/separator3"
+        app:srcCompat="@drawable/help" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="com.javeriana.bicisupport.fragments.ProfileFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toTopOf="@+id/separator2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="90dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

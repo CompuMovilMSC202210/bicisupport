@@ -51,5 +51,36 @@
         <item>Cyclocross</item>
         <item>Urbana</item>
         <item>Hibridas</item>
+    <string name="login_text">Iniciar Sesión</string>
+    <string name="user_text">Usuario</string>
+    <string name="password_text">Contraseña</string>
+    <string name="go_to_register">No tienes cuenta? <u>Registrate aquí</u></string>
+    <string name="go_to_login">Ya tienes cuenta? <u>Inicia sesión aquí</u></string>
+    <string name="register_text">Registro</string>
+    <string name="user_data">Datos del usuario</string>
+    <string name="bici_data">Datos de la bici</string>
+    <string name="add_photo">Agregar foto</string>
+    <string name="name">Nombre</string>
+    <string name="user">Usuario</string>
+    <string name="next">Siguiente</string>
+    <string name="email">Email</string>
+    <string name="password">Contraseña</string>
+    <string name="repeat_password">Repetir contraseña</string>
+    <string name="brand">Marca</string>
+    <string name="color">Color</string>
+    <string name="model">Modelo</string>
+    <string name="type">Tipo</string>
+    <string name="end_register">Finalizar registro</string>
+    <string name="details">Nombre\n\nUsuario\n\nEmail</string>
+    <string name="example_details">Nombre\n\nUsuario\n\nEmail</string>
+    <string name="edit_profile">Editar perfil</string>
+    <string name="bici_details">Ver datos de la bici</string>
+    <string name="ver_novedades">Ver novedades</string>
+    <string name="logout">Cerrar sesión</string>
+    <string name="home">Home</string>
+    <string-array name="example">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
     </string-array>
 </resources>
