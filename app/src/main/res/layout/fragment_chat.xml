@@ -36,7 +36,8 @@
             android:layout_weight="0.9"
             android:background="@null"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textColor="#ffffff" />
 
         <Button
             android:id="@+id/send"
