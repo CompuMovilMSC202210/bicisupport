@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_tips"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:padding="20dp"
+    tools:context=".fragments.TipsFragment">
+
+    <EditText
+        android:id="@+id/tips_filter"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:padding="5dp"
+        android:inputType="textPersonName"
+        android:background="@drawable/shape_linear_border"
+        android:layout_above="@id/title_tip_1"
+        android:textColor="@color/white"
+        android:drawableRight="@drawable/magnifier_icon"
+        android:hint="Buscar tips"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="149dp"
+        android:background="@drawable/shape_linear_border"
+        android:padding="15dp"
+        android:layout_marginTop="70dp">
+
+        <TextView
+            android:id="@+id/title_tip_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lorem_ipsum_title"
+            android:textColor="#F3ECEC"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/text_tip_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title_tip_1"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@id/image_tip_1"
+            android:text="@string/lorem_ipsum_tips"
+            android:textColor="@color/white"
+            android:textSize="10dp" />
+
+        <ImageView
+            android:id="@+id/image_tip_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/tips_1" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_tip_detail_1"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_below="@id/text_tip_1"
+            android:layout_margin="10dp"
+            android:layout_toLeftOf="@id/image_tip_1"
+            android:background="@drawable/button_border"
+            app:backgroundTint="@color/white"
+            app:icon="@drawable/magnifier_icon"
+            app:iconGravity="textStart"
+            app:iconSize="20dp"
+            app:iconPadding="0dp"
+            app:iconTint="@color/project_blue"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="149dp"
+        android:background="@drawable/shape_linear_border"
+        android:padding="15dp"
+        android:layout_marginTop="250dp">
+
+        <TextView
+            android:id="@+id/title_tip_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lorem_ipsum_title"
+            android:textColor="#F3ECEC"
+            android:textSize="18sp"
+            android:layout_alignParentRight="true"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/text_tip_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title_tip_2"
+            android:layout_toRightOf="@id/image_tip_2"
+            android:layout_alignParentRight="true"
+            android:text="@string/lorem_ipsum_tips"
+            android:textColor="@color/white"
+            android:textSize="10dp" />
+
+        <ImageView
+            android:id="@+id/image_tip_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/tips_2" />
+
+        <ImageView
+            android:id="@+id/image_tip_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/image_tip_2"
+            android:layout_alignTop="@+id/image_tip_2"
+            android:layout_alignEnd="@+id/image_tip_2"
+            android:layout_alignBottom="@+id/image_tip_2"
+            android:layout_alignParentLeft="true"
+            android:background="#95000000"
+            android:src="@drawable/play_icon" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_tip_detail_2"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_below="@id/text_tip_2"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/image_tip_2"
+            android:background="@drawable/button_border"
+            app:backgroundTint="@color/white"
+            app:icon="@drawable/magnifier_icon"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:iconSize="20dp"
+            app:iconTint="@color/project_blue" />
+
+
+    </RelativeLayout>
+</FrameLayout>

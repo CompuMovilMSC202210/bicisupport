@@ -51,12 +51,12 @@
         android:layout_height="70dp"
         android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/agreementButton"
+        app:layout_constraintEnd_toStartOf="@+id/alliesButton"
         app:layout_constraintStart_toEndOf="@+id/personButton"
         app:srcCompat="@drawable/separator" />
 
     <ImageButton
-        android:id="@+id/agreementButton"
+        android:id="@+id/alliesButton"
         android:layout_width="60dp"
         android:layout_height="70dp"
         android:layout_marginStart="10dp"
@@ -76,7 +76,7 @@
         android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/helpButton"
-        app:layout_constraintStart_toEndOf="@+id/agreementButton"
+        app:layout_constraintStart_toEndOf="@+id/alliesButton"
         app:srcCompat="@drawable/separator" />
 
     <ImageButton
