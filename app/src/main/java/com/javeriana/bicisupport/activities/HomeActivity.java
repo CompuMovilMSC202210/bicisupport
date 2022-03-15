@@ -1,9 +1,10 @@
 package com.javeriana.bicisupport.activities;
 
-import android.content.Intent;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageButton;
@@ -12,14 +13,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.javeriana.bicisupport.R;
+import com.javeriana.bicisupport.fragments.MapFragment;
 import com.javeriana.bicisupport.fragments.ListaAliadosFragment;
 import com.javeriana.bicisupport.fragments.ProfileFragment;
+import com.javeriana.bicisupport.fragments.TipsFragment;
+
+import org.osmdroid.api.IMapController;
+import org.osmdroid.config.Configuration;
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.MapView;
 
 import java.util.Objects;
 
 public class HomeActivity extends AppCompatActivity {
 
-    ImageButton assistant, help, profile, agreement;
+    ImageButton assistant, help, profile, allies;
+    private MapView map;
+    private IMapController mapController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +42,7 @@ public class HomeActivity extends AppCompatActivity {
         assistant = findViewById(R.id.assistantButton);
         help = findViewById(R.id.helpButton);
         profile = findViewById(R.id.personButton);
-        agreement = findViewById(R.id.agreementButton);
+        allies = findViewById(R.id.alliesButton);
 
         agreement.setOnClickListener(view -> {
             ListaAliadosFragment aliadosFragment = new ListaAliadosFragment();
@@ -40,7 +51,12 @@ public class HomeActivity extends AppCompatActivity {
             fragmentTransaction.replace(R.id.fragmentContainerView, aliadosFragment);
             fragmentTransaction.commit();
         });
-        help.setOnClickListener(view -> System.out.println("Help clicked"));
+        help.setOnClickListener(view -> {
+            TipsFragment tipsFragment = new TipsFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragmentContainerView, tipsFragment);
+            fragmentTransaction.commit();
+        });
         assistant.setOnClickListener(view -> System.out.println("Assistant clicked"));
         profile.setOnClickListener(view -> {
             ProfileFragment profileFragment = new ProfileFragment();
@@ -57,7 +73,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void onClickMap(MenuItem item) {
-        ProfileFragment profileFragment = new ProfileFragment();
+        MapFragment mapFragment = new MapFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
         fragmentTransaction.replace(R.id.fragmentContainerView, profileFragment).commit();
