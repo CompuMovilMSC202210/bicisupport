@@ -1,8 +1,8 @@
-package com.javeriana.bicisupport;
+package com.javeriana.bicisupport.models;
 
 import java.io.Serializable;
 
-public class Incidente implements Serializable {
+public class Incident implements Serializable {
     int numero;
     String novedad;
     String direccion;
@@ -12,7 +12,7 @@ public class Incidente implements Serializable {
     String serviciosp;
     Double costos;
 
-    public Incidente(int numero, String novedad, String direccion, String fecha, String detalle, String empresa, String serviciosp, Double costos) {
+    public Incident(int numero, String novedad, String direccion, String fecha, String detalle, String empresa, String serviciosp, Double costos) {
         this.numero = numero;
         this.novedad = novedad;
         this.direccion = direccion;

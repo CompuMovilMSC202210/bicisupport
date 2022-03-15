@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.javeriana.bicisupport.models.Incident;
+
 public class DetalleIncidente extends AppCompatActivity {
-    Incidente incidente;
+    Incident incident;
     TextView novedad, fecha, direccion, detalle, empresa, titulo;
     EditText costos, servicios;
 
@@ -19,7 +21,7 @@ public class DetalleIncidente extends AppCompatActivity {
         Bundle obtenerobjeto = getIntent().getExtras();
 
         if (obtenerobjeto != null){
-            incidente =(Incidente) obtenerobjeto.getSerializable("incidente");
+            incident =(Incident) obtenerobjeto.getSerializable("incidente");
             titulo = findViewById(R.id.nNumeronovedad);
             novedad = findViewById(R.id.ntipo);
             fecha = findViewById(R.id.nfecha);
@@ -29,14 +31,14 @@ public class DetalleIncidente extends AppCompatActivity {
             costos = findViewById(R.id.ncosto);
             servicios = findViewById(R.id.nservicios);
 
-            titulo.setText("Novedad N."+incidente.getNumero());
-            novedad.setText(incidente.getNovedad());
-            fecha.setText(incidente.getFecha());
-            direccion.setText(incidente.getDireccion());
-            detalle.setText(incidente.getDetalle());
-            empresa.setText(incidente.empresa);
-            costos.setText(incidente.getCostos().toString());
-            servicios.setText(incidente.getServiciosp());
+            titulo.setText("Novedad N."+ incident.getNumero());
+            novedad.setText(incident.getNovedad());
+            fecha.setText(incident.getFecha());
+            direccion.setText(incident.getDireccion());
+            detalle.setText(incident.getDetalle());
+            empresa.setText(incident.getEmpresa());
+            costos.setText(incident.getCostos().toString());
+            servicios.setText(incident.getServiciosp());
         }
     }
 }

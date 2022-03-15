@@ -39,7 +39,7 @@ public class HomeActivity extends AppCompatActivity {
             ProfileFragment profileFragment = new ProfileFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
-            fragmentTransaction.replace(R.id.fragmentContainerView, profileFragment);
+            fragmentTransaction.replace(R.id.fragmentContainerView, profileFragment).commit();
         });
     }
 
@@ -53,6 +53,6 @@ public class HomeActivity extends AppCompatActivity {
         ProfileFragment profileFragment = new ProfileFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
-        fragmentTransaction.replace(R.id.fragmentContainerView, profileFragment);
+        fragmentTransaction.replace(R.id.fragmentContainerView, profileFragment).commit();
     }
 }

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,21 +14,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.javeriana.bicisupport.DetalleIncidente;
-import com.javeriana.bicisupport.Incidente;
+import com.javeriana.bicisupport.models.Incident;
 import com.javeriana.bicisupport.R;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
 
-public class IncidenteAdapter extends ArrayAdapter<Incidente> {
-    private ArrayList<Incidente> incidentes;
+public class IncidenteAdapter extends ArrayAdapter<Incident> {
+    private ArrayList<Incident> incidents;
     private Context context;
 
-    public IncidenteAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Incidente> objects) {
+    public IncidenteAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Incident> objects) {
         super(context, resource, objects);
-        this.incidentes = objects;
+        this.incidents = objects;
         this.context = context;
     }
 
@@ -48,16 +45,16 @@ public class IncidenteAdapter extends ArrayAdapter<Incidente> {
         Button detalle = convertView.findViewById(R.id.lbtndetalle);
         Button calificacion = convertView.findViewById(R.id.lbtncalificacion);
 
-        tvTitulo.setText("Novedad N. "+String.valueOf(incidentes.get(position).getNumero()));
-        tvTNovedad.setText(incidentes.get(position).getNovedad());
-        tvDireccion.setText(incidentes.get(position).getDireccion());
-        etFecha.setText(incidentes.get(position).getFecha());
-        etdetalle.setText(incidentes.get(position).getDetalle());
+        tvTitulo.setText("Novedad N. "+String.valueOf(incidents.get(position).getNumero()));
+        tvTNovedad.setText(incidents.get(position).getNovedad());
+        tvDireccion.setText(incidents.get(position).getDireccion());
+        etFecha.setText(incidents.get(position).getFecha());
+        etdetalle.setText(incidents.get(position).getDetalle());
 
         detalle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                context.startActivity(new Intent(context, DetalleIncidente.class).putExtra("incidente", incidentes.get(position)));
+                context.startActivity(new Intent(context, DetalleIncidente.class).putExtra("incidente", incidents.get(position)));
             }
         });
 

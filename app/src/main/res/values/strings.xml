@@ -51,6 +51,7 @@
         <item>Cyclocross</item>
         <item>Urbana</item>
         <item>Hibridas</item>
+    </string-array>
     <string name="login_text">Iniciar Sesión</string>
     <string name="user_text">Usuario</string>
     <string name="password_text">Contraseña</string>
@@ -74,8 +75,8 @@
     <string name="details">Nombre\n\nUsuario\n\nEmail</string>
     <string name="example_details">Nombre\n\nUsuario\n\nEmail</string>
     <string name="edit_profile">Editar perfil</string>
-    <string name="bici_details">Ver datos de la bici</string>
-    <string name="ver_novedades">Ver novedades</string>
+    <string name="bici_details">Editar datos de la bici</string>
+    <string name="ver_novedades">Mis novedades</string>
     <string name="logout">Cerrar sesión</string>
     <string name="home">Home</string>
     <string-array name="example">
@@ -83,4 +84,6 @@
         <item>2</item>
         <item>3</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
