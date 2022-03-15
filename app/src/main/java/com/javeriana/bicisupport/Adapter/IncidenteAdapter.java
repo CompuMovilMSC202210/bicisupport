@@ -57,7 +57,7 @@ public class IncidenteAdapter extends ArrayAdapter<Incidente> {
         detalle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //context.startActivity(new Intent(context, DetalleIncidente.class).putExtra("incidente", incidentes.get(position)));
+                context.startActivity(new Intent(context, DetalleIncidente.class).putExtra("incidente", incidentes.get(position)));
             }
         });
 
