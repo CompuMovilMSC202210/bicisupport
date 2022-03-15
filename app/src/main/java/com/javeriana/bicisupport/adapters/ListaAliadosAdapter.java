@@ -36,12 +36,12 @@ public class ListaAliadosAdapter extends ArrayAdapter<String> {
 
     public View getView(int position, View view, ViewGroup parent) {
 
-        LayoutInflater inflater=context.getLayoutInflater();
-        View rowView=inflater.inflate(R.layout.vista_aliado_lista, null,true);
+        LayoutInflater inflater = context.getLayoutInflater();
+        View rowView = inflater.inflate(R.layout.vista_aliado_lista, null, true);
 
-        TextView nombreAliadoText =  rowView.findViewById(R.id.listaAliados_nombreAliado);
-        TextView direccionAliadoText =  rowView.findViewById(R.id.listaAliados_direccionAliado);
-        TextView descripcionAliadoText =  rowView.findViewById(R.id.listaResenas_descripcionResena);
+        TextView nombreAliadoText = rowView.findViewById(R.id.listaAliados_nombreAliado);
+        TextView direccionAliadoText = rowView.findViewById(R.id.listaAliados_direccionAliado);
+        TextView descripcionAliadoText = rowView.findViewById(R.id.listaResenas_descripcionResena);
         Button botonDetalle = rowView.findViewById(R.id.listaAliado_Detalle);
         Button botonResenas = rowView.findViewById(R.id.listaAliado_Resenas);
 
@@ -53,7 +53,7 @@ public class ListaAliadosAdapter extends ArrayAdapter<String> {
             @Override
             public void onClick(View view) {
                 DetalleAliadoFragment detalleAliadoFragment = new DetalleAliadoFragment();
-                FragmentTransaction fragmentTransaction =  ((HomeActivity)context).getSupportFragmentManager().beginTransaction();
+                FragmentTransaction fragmentTransaction = ((HomeActivity) context).getSupportFragmentManager().beginTransaction();
 
                 fragmentTransaction.replace(R.id.fragmentContainerView, detalleAliadoFragment);
                 fragmentTransaction.commit();
@@ -63,8 +63,8 @@ public class ListaAliadosAdapter extends ArrayAdapter<String> {
         botonResenas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ListaResenasAliadoFragment listaResenasAliadoFragment= new ListaResenasAliadoFragment();
-                FragmentTransaction fragmentTransaction = ((HomeActivity)context).getSupportFragmentManager().beginTransaction();
+                ListaResenasAliadoFragment listaResenasAliadoFragment = new ListaResenasAliadoFragment();
+                FragmentTransaction fragmentTransaction = ((HomeActivity) context).getSupportFragmentManager().beginTransaction();
 
                 fragmentTransaction.replace(R.id.fragmentContainerView, listaResenasAliadoFragment);
                 fragmentTransaction.commit();

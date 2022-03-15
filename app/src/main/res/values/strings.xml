@@ -72,9 +72,9 @@
     <string name="listaAliados_menorPrecio">Menor precio</string>
     <string name="listaAliados_mejorCalificados">Mejor calificados</string>
     <string name="listaAliados_nombreAliado">Nombre aliado</string>
-    <string name="listaAliados_direccionAliado">direccion aliado</string>
-    <string name="listaAliados_descripcionServicios">Descripcion servicios</string>
-    <string name="listaAliados_botonDetalles">detalles</string>
+    <string name="listaAliados_direccionAliado">Dirección aliado</string>
+    <string name="listaAliados_descripcionServicios">Descripción servicios</string>
+    <string name="listaAliados_botonDetalles">Detalles</string>
     <string name="listaAliados_botonResenas">Reseñas</string>
     <string name="listaAliados_tipoAliado">Tipo de aliado</string>
 

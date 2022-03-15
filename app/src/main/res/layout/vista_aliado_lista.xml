@@ -16,8 +16,8 @@
             android:id="@+id/imagen_aliado"
             android:layout_width="115dp"
             android:layout_height="92dp"
-            android:src="@drawable/profile"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:src="@drawable/profile" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -88,13 +88,12 @@
             android:background="@drawable/round_button"
             android:text="@string/detalleAliado_contactar"
             android:textAllCaps="false"
-            android:textSize="12sp"
             android:textColor="#00239E"
+            android:textSize="12sp"
             app:backgroundTint="@color/white"
             app:icon="@drawable/phone"
-            app:iconTint="@color/project_blue"
             app:iconSize="20dp"
-            />
+            app:iconTint="@color/project_blue" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/listaAliado_Detalle"
@@ -105,12 +104,12 @@
             android:background="@drawable/round_button"
             android:text="@string/listaAliados_botonDetalles"
             android:textAllCaps="false"
-            android:textSize="12sp"
             android:textColor="#00239E"
+            android:textSize="12sp"
+            app:backgroundTint="@color/white"
             app:icon="@drawable/detalle"
-            app:iconTint="@color/project_blue"
             app:iconSize="20dp"
-            app:backgroundTint="@color/white"/>
+            app:iconTint="@color/project_blue" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/listaAliado_Resenas"
@@ -121,12 +120,12 @@
             android:background="@drawable/round_button"
             android:text="@string/listaAliados_botonResenas"
             android:textAllCaps="false"
-            android:textSize="12sp"
             android:textColor="#00239E"
+            android:textSize="12sp"
+            app:backgroundTint="@color/white"
             app:icon="@drawable/star"
-            app:iconTint="@color/project_blue"
             app:iconSize="20dp"
-            app:backgroundTint="@color/white"/>
+            app:iconTint="@color/project_blue" />
 
     </LinearLayout>
 </LinearLayout>
