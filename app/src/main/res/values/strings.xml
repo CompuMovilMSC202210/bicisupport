@@ -1,5 +1,57 @@
 <resources>
-    <string name="app_name">BiciSupport</string>
+    <string name="app_name">bicisupport</string>
+    <string name="encuesta_titulo">ENCUESTA DE SATISFACCIÓN</string>
+    <string name="encuesta_p1">¿Cuál es su nivel de satisfacción con la atención?</string>
+    <string name="encuesta_p2">¿Cuán rápido fue atendid@ por un asesor?</string>
+    <string name="encuesta_p3">¿Su problema fue solucionado?</string>
+    <string name="encuesta_p4">¿Tiene algún comentario?</string>
+    <string name="encuesta_enviar">Enviar Calificación</string>
+    <string name="encuesta_si">Si</string>
+    <string name="encuesta_no">No</string>
+    <string name="encuesta_ayuda">Comentarios sobre la atención</string>
+    <string name="novedad_btn_detalle">Detalle</string>
+    <string name="novedad_btn_calificacion">Calificación</string>
+    <string name="ntipo">Tipo de novedad:</string>
+    <string name="nfecha">Fecha:</string>
+    <string name="ndireccion">Dirección:</string>
+    <string name="ndetalle">Detalle:</string>
+    <string name="nempresa">Empresa:</string>
+    <string name="nservcios_prestados">Servicios prestados:</string>
+    <string name="ncostos">Costos:</string>
+    <string name="btitulo">Datos de la Bicicleta</string>
+    <string name="bmarca">Marca</string>
+    <string name="bcolor">Color</string>
+    <string name="bmodelo">Modelo</string>
+    <string name="btipo">Tipo</string>
+    <string name="bfoto">Cambiar Foto</string>
+    <string name="bactualizar">Actualizar Datos</string>
+    <string name="bmodeloq">RoadMaster</string>
+    <string-array name="bicicletas_marcas">
+        <item>Specialized</item>
+        <item>Trek</item>
+        <item>Scott Bikes</item>
+        <item>Cube Bikes</item>
+        <item>BCM bikes</item>
+        <item>Shimano</item>
+        <item>Sigma</item>
+    </string-array>
+    <string-array name="color_bicicletas">
+        <item>Rojo</item>
+        <item>Verde</item>
+        <item>Azul</item>
+        <item>Fucsia</item>
+        <item>Celeste</item>
+        <item>Violeta</item>
+        <item>Cafe</item>
+    </string-array>
+    <string-array name="tipo_bibicleta">
+        <item>Ruta</item>
+        <item>Triatlon </item>
+        <item>Ciclomontañismo</item>
+        <item>Cyclocross</item>
+        <item>Urbana</item>
+        <item>Hibridas</item>
+    </string-array>
     <string name="LoginText">Iniciar Sesión</string>
     <string name="userText">Usuario</string>
     <string name="passwordText">Contraseña</string>
@@ -61,8 +113,8 @@
     <string name="details">Nombre\n\nUsuario\n\nEmail</string>
     <string name="example_details">Nombre\n\nUsuario\n\nEmail</string>
     <string name="edit_profile">Editar perfil</string>
-    <string name="bici_details">Ver datos de la bici</string>
-    <string name="ver_novedades">Ver novedades</string>
+    <string name="bici_details">Editar datos de la bici</string>
+    <string name="ver_novedades">Mis novedades</string>
     <string name="logout">Cerrar sesión</string>
     <string name="home">Home</string>
     <string-array name="example">
