@@ -122,6 +122,32 @@
         <item>2</item>
         <item>3</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="brand_bike">
+        <item>GW</item>
+        <item>BMC</item>
+        <item>Pinarello</item>
+        <item>Willier</item>
+    </string-array>
+    <string-array name="color_bike">
+        <item>Negro</item>
+        <item>Rojo</item>
+        <item>Azul</item>
+        <item>Gris</item>
+    </string-array>
+    <string-array name="type_bike">
+        <item>Ruta</item>
+        <item>Montaña</item>
+        <item>BMX</item>
+        <item>Ciclocross</item>
+    </string-array>
+    <string name="lorem_ipsum_title">Lorem Ipsum</string>
+    <string name="lorem_ipsum_tips">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</string>
+    <string name="lorem_ipsum_details_1">Phasellus gravida rutrum fringilla. Phasellus imperdiet dui lacus, ut viverra nisi pulvinar non. Donec dapibus convallis faucibus. Mauris ornare ut ipsum ac varius. Mauris a odio orci. Praesent eleifend dui vitae mauris condimentum imperdiet. Vestibulum dictum sollicitudin libero et rhoncus. Pellentesque eu purus lacinia, posuere augue sit amet, tristique urna. Nullam eu elit eget libero tristique auctor. Pellentesque nisi eros, aliquet eu congue a, commodo nec augue. Proin et ex in felis sodales euismod quis quis diam. Donec sollicitudin malesuada vehicula. Morbi ut nisi eget ex aliquam rhoncus. Integer tincidunt sem nec bibendum dapibus. Integer sit amet elementum velit. Quisque sit amet lorem tempus nunc consequat ullamcorper.</string>
+    <string name="lorem_ipsum_details_2">Morbi nunc elit, sollicitudin eleifend eros eget, sagittis gravida urna. Sed auctor metus mi, eu pulvinar metus rutrum pellentesque. Donec suscipit ipsum id mi dapibus posuere. Sed efficitur risus nisi, eu vestibulum ex aliquam sed. Donec eget nulla dolor. Integer luctus eleifend sem, sed commodo est laoreet vitae. Aenean sagittis ex sed dui egestas euismod. Pellentesque posuere nibh tristique ultrices tempus. Aliquam lorem ligula, aliquet eget faucibus ullamcorper, sodales vel enim. Curabitur dui metus, aliquam nec est at, consequat lobortis arcu. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse consequat lobortis porttitor. Duis congue sit amet purus sit amet volutpat. Quisque sit amet cursus lectus. Mauris facilisis vehicula purus, quis maximus diam.</string>
+    <string name="edit_bike_picture"><u>Cambiar foto de la bici</u></string>
+    <string name="save_bike_edit">Guardar</string>
+    <string name="brand_bike">Marca</string>
+    <string name="color_bike">Color</string>
+    <string name="model_bike">Modelo</string>
+    <string name="type_bike">Tipo</string>
 </resources>
