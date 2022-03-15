@@ -75,7 +75,7 @@ public class IncidentDetailFragment extends Fragment {
         
         Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setTitle(HtmlCompat.fromHtml("<font color='#00239E'>Detalle novedad</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
 
-        Bundle obtenerobjeto = getActivity().getIntent().getExtras();
+        Bundle obtenerobjeto = getArguments();
 
         if (obtenerobjeto != null){
             incident =(Incident) obtenerobjeto.getSerializable("incidente");

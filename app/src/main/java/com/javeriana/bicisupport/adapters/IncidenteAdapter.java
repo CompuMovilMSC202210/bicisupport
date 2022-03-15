@@ -1,6 +1,7 @@
 package com.javeriana.bicisupport.adapters;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +55,10 @@ public class IncidenteAdapter extends ArrayAdapter<Incident> {
         etdetalle.setText(incidents.get(position).getDetalle());
 
         detalle.setOnClickListener(view -> {
+            Bundle datos = new Bundle();
+            datos.putSerializable("incidente",incidents.get(position));
             IncidentDetailFragment fragment = new IncidentDetailFragment();
+            fragment.setArguments(datos);
             FragmentTransaction fragmentTransaction = ((HomeActivity) context).getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragmentContainerView, fragment).commit();
             // context.startActivity(new Intent(context, DetalleIncidente.class).putExtra("incidente", incidents.get(position)));
