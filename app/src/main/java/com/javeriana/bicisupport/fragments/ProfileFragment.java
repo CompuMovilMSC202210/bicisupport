@@ -2,7 +2,6 @@ package com.javeriana.bicisupport.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.javeriana.bicisupport.R;
+import com.javeriana.bicisupport.activities.HomeActivity;
 import com.javeriana.bicisupport.activities.LoginActivity;
 
 import java.util.Objects;
@@ -35,6 +35,7 @@ public class ProfileFragment extends Fragment {
     private String mParam2;
 
     Button logout, biciDetails, novedades;
+    Button editProfile;
 
     public ProfileFragment() {
     }
@@ -76,6 +77,7 @@ public class ProfileFragment extends Fragment {
         logout = root.findViewById(R.id.logout);
         biciDetails = root.findViewById(R.id.bici_details);
         novedades = root.findViewById(R.id.novedades);
+        editProfile = root.findViewById(R.id.edit_profile);
 
         logout.setOnClickListener(view -> startActivity(new Intent(view.getContext(), LoginActivity.class)));
         biciDetails.setOnClickListener(view -> {
@@ -89,6 +91,16 @@ public class ProfileFragment extends Fragment {
             fragmentTransaction.replace(R.id.fragmentContainerView, fragment).commit();
         });
 
+        editProfile.setOnClickListener(View -> {
+            ModifyProfileFragment modifyProfileFragment = new ModifyProfileFragment();
+            FragmentTransaction fragmentTransaction = ((HomeActivity)getContext()).getSupportFragmentManager().beginTransaction();
+
+            fragmentTransaction.replace(R.id.fragmentContainerView, modifyProfileFragment);
+            fragmentTransaction.commit();
+        });
+
+
         return root;
+
     }
 }

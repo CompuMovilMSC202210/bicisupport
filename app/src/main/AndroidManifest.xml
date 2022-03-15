@@ -10,7 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Bicisupport">
         <activity
-            android:name=".DetalleIncidente"
+            android:name=".DetalleIncidente" />
+        <activity
+            android:name=".fragments.ListaResenasAliadoFragment"
+            android:exported="false" />
+        <activity
+            android:name=".fragments.ListaAliadosFragment"
+            android:exported="false" />
+        <activity
+            android:name=".fragments.DetalleAliadoFragment"
             android:exported="false" />
         <activity
             android:name=".activities.BicycleRegisterActivity"

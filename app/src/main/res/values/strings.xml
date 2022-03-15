@@ -52,6 +52,44 @@
         <item>Urbana</item>
         <item>Hibridas</item>
     </string-array>
+    <string name="LoginText">Iniciar Sesión</string>
+    <string name="userText">Usuario</string>
+    <string name="passwordText">Contraseña</string>
+    <string name="goToRegister">No tienes cuenta? <u>Registrate aquí</u></string>
+
+    <!--Strings activity detalle aliado-->
+    <string name="detalleAliado_nombreAliado">Aliado X</string>
+    <string name="detalleAliado_tipoAliado">Tipo aliado</string>
+    <string name="detalleAliado_direccion">Direccion aliado</string>
+    <string name="detalleAliado_contactar">Contactar</string>
+    <string name="detalleAliado_imagen">Imagen aliado</string>
+    <string name="detalleAliado_serviciosPrestados">Servicios prestados:</string>
+    <string name="detalleAliado_ubicacionMapa">Ubicacion en mapa:</string>
+    <string name="detalleAliado_Servicios">1. Servicio XXXX \n2. Servicio XXXX \n3. Servicio XXXX \n4. Servicio XXXX \n5. Servicio XXXX</string>
+
+    <!--Strings lista aliados-->
+    <string name="listaAliados_cercanos">Mas cercanos</string>
+    <string name="listaAliados_menorPrecio">Menor precio</string>
+    <string name="listaAliados_mejorCalificados">Mejor calificados</string>
+    <string name="listaAliados_nombreAliado">Nombre aliado</string>
+    <string name="listaAliados_direccionAliado">direccion aliado</string>
+    <string name="listaAliados_descripcionServicios">Descripcion servicios</string>
+    <string name="listaAliados_botonDetalles">detalles</string>
+    <string name="listaAliados_botonResenas">Reseñas</string>
+    <string name="listaAliados_tipoAliado">Tipo de aliado</string>
+
+    <!--Strings modificar cuenta-->
+    <string name="modificarCuenta_cambiarFoto">Cambiar foto de perfil</string>
+    <string name="modificarCuenta_labelNombre">Nombre</string>
+    <string name="modificarCuenta_labelUsuario">Usuario</string>
+    <string name="modificarCuenta_botonGuardar">Guardar</string>
+
+    <!--Strings lista reseñas-->
+    <string name="listaResenas_titulo">Reseñas Aliado 1</string>
+    <string name="listaResenas_botonTodas">Todas</string>
+    <string name="listaResenas_botonPositivas">Positivas</string>
+    <string name="listaResenas_negativas">Negativas</string>
+
     <string name="login_text">Iniciar Sesión</string>
     <string name="user_text">Usuario</string>
     <string name="password_text">Contraseña</string>
