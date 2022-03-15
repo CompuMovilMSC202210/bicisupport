@@ -34,8 +34,8 @@
                 android:layout_marginStart="60dp"
                 android:layout_marginTop="1dp"
                 android:layout_marginEnd="60dp"
-                android:paddingTop="7dp"
                 android:gravity="center"
+                android:paddingTop="7dp"
                 android:text="@string/edit_bike_picture"
                 android:textColor="@color/white"
                 android:textSize="10sp"
@@ -162,7 +162,10 @@
                 android:text="@string/save_bike_edit"
                 android:textColor="@color/project_blue"
                 android:textStyle="bold"
-                app:backgroundTint="@color/white" />
+                app:backgroundTint="@color/white"
+                app:icon="@drawable/save"
+                app:iconSize="30dp"
+                app:iconTint="@color/project_blue" />
 
         </LinearLayout>
     </ScrollView>

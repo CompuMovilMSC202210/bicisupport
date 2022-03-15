@@ -61,6 +61,9 @@
         android:text="@string/edit_profile"
         android:textColor="@color/project_blue"
         app:backgroundTint="@color/white"
+        app:icon="@drawable/pencil"
+        app:iconSize="30dp"
+        app:iconTint="@color/project_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
@@ -76,6 +79,9 @@
         android:text="@string/bici_details"
         android:textColor="@color/project_blue"
         app:backgroundTint="@color/white"
+        app:icon="@drawable/bicycle"
+        app:iconSize="30dp"
+        app:iconTint="@color/project_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_profile" />
@@ -91,6 +97,9 @@
         android:text="@string/ver_novedades"
         android:textColor="@color/project_blue"
         app:backgroundTint="@color/white"
+        app:icon="@drawable/inbox"
+        app:iconSize="30dp"
+        app:iconTint="@color/project_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bici_details" />
@@ -106,6 +115,9 @@
         android:text="@string/logout"
         android:textColor="@color/project_blue"
         app:backgroundTint="@color/white"
+        app:icon="@drawable/logout"
+        app:iconSize="30dp"
+        app:iconTint="@color/project_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/novedades" />
