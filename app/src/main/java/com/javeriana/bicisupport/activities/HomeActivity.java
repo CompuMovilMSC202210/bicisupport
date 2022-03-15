@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.javeriana.bicisupport.R;
 import com.javeriana.bicisupport.fragments.MapFragment;
+import com.javeriana.bicisupport.fragments.ListaAliadosFragment;
 import com.javeriana.bicisupport.fragments.ProfileFragment;
 import com.javeriana.bicisupport.fragments.TipsFragment;
 
@@ -43,7 +44,13 @@ public class HomeActivity extends AppCompatActivity {
         profile = findViewById(R.id.personButton);
         allies = findViewById(R.id.alliesButton);
 
-        allies.setOnClickListener(view -> System.out.println("Allies clicked"));
+        agreement.setOnClickListener(view -> {
+            ListaAliadosFragment aliadosFragment = new ListaAliadosFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+
+            fragmentTransaction.replace(R.id.fragmentContainerView, aliadosFragment);
+            fragmentTransaction.commit();
+        });
         help.setOnClickListener(view -> {
             TipsFragment tipsFragment = new TipsFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -54,8 +61,8 @@ public class HomeActivity extends AppCompatActivity {
         profile.setOnClickListener(view -> {
             ProfileFragment profileFragment = new ProfileFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragmentContainerView, profileFragment);
-            fragmentTransaction.commit();
+
+            fragmentTransaction.replace(R.id.fragmentContainerView, profileFragment).commit();
         });
     }
 
@@ -68,7 +75,7 @@ public class HomeActivity extends AppCompatActivity {
     public void onClickMap(MenuItem item) {
         MapFragment mapFragment = new MapFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentContainerView, mapFragment);
-        fragmentTransaction.commit();
+
+        fragmentTransaction.replace(R.id.fragmentContainerView, profileFragment).commit();
     }
 }
