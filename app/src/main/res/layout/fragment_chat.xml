@@ -1,51 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradiente_color"
-    tools:context=".Chat">
+    tools:context=".fragments.ChatFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/lmensajesc"
-        android:layout_width="409dp"
-        android:layout_height="636dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#4DFFFBFB"
-        android:backgroundTint="@null"
-        android:orientation="horizontal"
-        android:padding="6dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_marginTop="30dp"
+        android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/cmensajec"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_weight="0.9"
-            android:background="@null"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:textColor="#ffffff" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/lmensajesc"
+            android:layout_width="409dp"
+            android:layout_height="636dp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/send"
-            android:layout_width="10dp"
-            android:layout_height="48dp"
-            android:layout_weight="0.3"
-            android:background="@drawable/send" />
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#4DFFFBFB"
+            android:backgroundTint="@null"
+            android:orientation="horizontal"
+            android:padding="6dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-    </LinearLayout>
+            <EditText
+                android:id="@+id/cmensajec"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_weight="0.9"
+                android:background="@null"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:textColor="#ffffff" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <Button
+                android:id="@+id/send"
+                android:layout_width="10dp"
+                android:layout_height="48dp"
+                android:layout_weight="0.3"
+                app:backgroundTint="@color/white"
+                android:background="@drawable/send" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

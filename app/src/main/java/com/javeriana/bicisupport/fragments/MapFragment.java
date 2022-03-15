@@ -48,8 +48,8 @@ public class MapFragment extends Fragment {
         map.setBuiltInZoomControls(true);
         map.setMultiTouchControls(true);
         mapController = map.getController();
-        mapController.setZoom(15);
-        GeoPoint startPoint = new GeoPoint(4.620962, -74.080135);
+        mapController.setZoom(20);
+        GeoPoint startPoint = new GeoPoint(4.6269924,-74.0651919);
         mapController.setCenter(startPoint);
         ((ConstraintLayout) root.findViewById(R.id.mapLayout)).addView(map);
 

@@ -45,7 +45,7 @@ public class HomeActivity extends AppCompatActivity {
         profile = findViewById(R.id.personButton);
         allies = findViewById(R.id.alliesButton);
 
-        agreement.setOnClickListener(view -> {
+        allies.setOnClickListener(view -> {
             ListaAliadosFragment aliadosFragment = new ListaAliadosFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
@@ -82,6 +82,6 @@ public class HomeActivity extends AppCompatActivity {
         MapFragment mapFragment = new MapFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
-        fragmentTransaction.replace(R.id.fragmentContainerView, profileFragment).commit();
+        fragmentTransaction.replace(R.id.fragmentContainerView, mapFragment).commit();
     }
 }

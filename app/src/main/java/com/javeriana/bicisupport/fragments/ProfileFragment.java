@@ -20,12 +20,12 @@ import java.util.Objects;
 
 public class ProfileFragment extends Fragment {
 
-    Button logout, bici_details;
     Button logout, biciDetails, novedades;
     Button editProfile;
 
     public ProfileFragment() {
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,9 +38,9 @@ public class ProfileFragment extends Fragment {
 
         Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setTitle(HtmlCompat.fromHtml("<font color='#00239E'>Cuenta</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
 
-        bici_details = root.findViewById(R.id.bici_details);
+        biciDetails = root.findViewById(R.id.bici_details);
 
-        bici_details.setOnClickListener(view -> {
+        biciDetails.setOnClickListener(view -> {
             DetailBikeFragment detailBikeFragment = new DetailBikeFragment();
             FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragmentContainerView, detailBikeFragment);
@@ -54,7 +54,7 @@ public class ProfileFragment extends Fragment {
 
         logout.setOnClickListener(view -> startActivity(new Intent(view.getContext(), LoginActivity.class)));
         biciDetails.setOnClickListener(view -> {
-            BiciDetailsFragment fragment = new BiciDetailsFragment();
+            DetailBikeFragment fragment = new DetailBikeFragment();
             FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragmentContainerView, fragment).commit();
         });
@@ -66,7 +66,7 @@ public class ProfileFragment extends Fragment {
 
         editProfile.setOnClickListener(View -> {
             ModifyProfileFragment modifyProfileFragment = new ModifyProfileFragment();
-            FragmentTransaction fragmentTransaction = ((HomeActivity)getContext()).getSupportFragmentManager().beginTransaction();
+            FragmentTransaction fragmentTransaction = ((HomeActivity) getContext()).getSupportFragmentManager().beginTransaction();
 
             fragmentTransaction.replace(R.id.fragmentContainerView, modifyProfileFragment);
             fragmentTransaction.commit();
