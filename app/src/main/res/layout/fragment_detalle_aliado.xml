@@ -41,30 +41,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/button"
-        android:layout_width="113dp"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="32dp"
-        android:backgroundTint="#FFFFFF"
+        android:background="@drawable/round_button"
         android:text="@string/detalleAliado_contactar"
         android:textColor="#00239E"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:icon="@drawable/phone"
+        app:iconSize="20dp"
+        app:iconTint="@color/project_blue"
+        app:backgroundTint="@color/white"
+
+        />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="120dp"
         android:layout_height="120dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="44dp"
+        android:contentDescription="@string/detalleAliado_imagen"
         android:src="@drawable/profile"
-        android:layout_marginTop="42dp"
-        android:layout_marginEnd="28dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars"
-        android:contentDescription="@string/detalleAliado_imagen" />
+        tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/textServiciosPrestados"
