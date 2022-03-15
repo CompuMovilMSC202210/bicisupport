@@ -1,7 +1,6 @@
 package com.javeriana.bicisupport.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.javeriana.bicisupport.DetalleIncidente;
 import com.javeriana.bicisupport.activities.HomeActivity;
 import com.javeriana.bicisupport.fragments.ChatEvaluationFragment;
 import com.javeriana.bicisupport.fragments.IncidentDetailFragment;
