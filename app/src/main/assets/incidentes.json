@@ -1,0 +1,30 @@
+{
+  "incidentes":[
+    {"numero":1,
+      "tipo":"Acompañamiento",
+      "direccion":"Calle 27 N.38-90",
+      "fecha":"12/01/2023",
+      "detalle":"Ayuda de acompañamiento por zona peligrosa y altas horas",
+      "empresa": "Sura S.A",
+      "sprestados": "Acompañamiento nocturo",
+      "costos": 0.0
+    },
+    {"numero":2,
+      "tipo":"Daño Mecanico",
+      "direccion":"Carrera 90 N.17-11",
+      "fecha":"12/01/2022",
+      "detalle":"Daño de la cadena de la bicicleta",
+      "empresa": "Bicicletas Mundiales S.A",
+      "sprestados": "Acompañamiento noctura, transporte al lugar de residencia",
+      "costos": 50000.0
+    },
+    {"numero":3,
+      "tipo":"Accidente",
+      "direccion":"Calle 30 N.38-90",
+      "fecha":"12/01/2021",
+      "detalle":"Un carro arrollo al ciclista",
+      "empresa": "Seguros Mundial S.A",
+      "sprestados": "Transporte al hospital, cinco dias de tratamiento",
+      "costos": 250300.20
+    }]
+}
