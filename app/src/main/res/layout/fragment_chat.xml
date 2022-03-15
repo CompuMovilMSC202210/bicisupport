@@ -5,12 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradiente_color"
+    android:padding="10dp"
     tools:context=".fragments.ChatFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="30dp"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/lmensajesc"
@@ -49,8 +50,8 @@
                 android:layout_width="10dp"
                 android:layout_height="48dp"
                 android:layout_weight="0.3"
-                app:backgroundTint="@color/white"
-                android:background="@drawable/send" />
+                android:background="@drawable/send"
+                app:backgroundTint="@color/white" />
 
         </LinearLayout>
 

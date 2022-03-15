@@ -8,117 +8,118 @@
     android:background="@drawable/background"
     tools:context=".fragments.ProfileFragment">
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="40dp"
-        android:src="@drawable/profile"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="60dp"
-        android:orientation="horizontal"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageView4">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/textView10"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/details"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/example_details"
-            android:textColor="@color/white"
-            android:textSize="18sp" />
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="40dp"
+                android:src="@drawable/profile" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/edit_profile"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="60dp"
-        android:background="@drawable/save_button"
-        android:text="@string/edit_profile"
-        android:textColor="@color/project_blue"
-        app:backgroundTint="@color/white"
-        app:icon="@drawable/pencil"
-        app:iconSize="30dp"
-        app:iconTint="@color/project_blue"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="60dp"
+                android:orientation="horizontal">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/bici_details"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="60dp"
-        android:background="@drawable/bici_details"
-        android:text="@string/bici_details"
-        android:textColor="@color/project_blue"
-        app:backgroundTint="@color/white"
-        app:icon="@drawable/bicycle"
-        app:iconSize="30dp"
-        app:iconTint="@color/project_blue"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_profile" />
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/details"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/novedades"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="60dp"
-        android:background="@drawable/novedades_button"
-        android:text="@string/ver_novedades"
-        android:textColor="@color/project_blue"
-        app:backgroundTint="@color/white"
-        app:icon="@drawable/inbox"
-        app:iconSize="30dp"
-        app:iconTint="@color/project_blue"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bici_details" />
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/example_details"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+            </LinearLayout>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/logout"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="60dp"
-        android:background="@drawable/logout_button"
-        android:text="@string/logout"
-        android:textColor="@color/project_blue"
-        app:backgroundTint="@color/white"
-        app:icon="@drawable/logout"
-        app:iconSize="30dp"
-        app:iconTint="@color/project_blue"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/novedades" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/edit_profile"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="60dp"
+                android:background="@drawable/save_button"
+                android:text="@string/edit_profile"
+                android:textColor="@color/project_blue"
+                app:backgroundTint="@color/white"
+                app:icon="@drawable/pencil"
+                app:iconSize="30dp"
+                app:iconTint="@color/project_blue" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/bici_details"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="60dp"
+                android:background="@drawable/bici_details"
+                android:text="@string/bici_details"
+                android:textColor="@color/project_blue"
+                app:backgroundTint="@color/white"
+                app:icon="@drawable/bicycle"
+                app:iconSize="30dp"
+                app:iconTint="@color/project_blue" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/novedades"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="60dp"
+                android:background="@drawable/novedades_button"
+                android:text="@string/ver_novedades"
+                android:textColor="@color/project_blue"
+                app:backgroundTint="@color/white"
+                app:icon="@drawable/inbox"
+                app:iconSize="30dp"
+                app:iconTint="@color/project_blue" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/logout"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="60dp"
+                android:background="@drawable/logout_button"
+                android:text="@string/logout"
+                android:textColor="@color/project_blue"
+                app:backgroundTint="@color/white"
+                app:icon="@drawable/logout"
+                app:iconSize="30dp"
+                app:iconTint="@color/project_blue" />
+        </LinearLayout>
+    </ScrollView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
