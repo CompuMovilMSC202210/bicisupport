@@ -18,8 +18,8 @@ public class EncuestaSatisfaccionChat extends AppCompatActivity {
         go.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent intent = new Intent(view.getContext(), ListaIncidentes.class);
-                //startActivity(intent);
+                Intent intent = new Intent(view.getContext(), ListaIncidentes.class);
+                startActivity(intent);
             }
         });
     }
