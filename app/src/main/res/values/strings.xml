@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">bicisupport</string>
+    <string name="encuesta_titulo">ENCUESTA DE SATISFACCIÓN</string>
+    <string name="encuesta_p1">¿Cuál es su nivel de satisfacción con la atención?</string>
+    <string name="encuesta_p2">¿Cuán rápido fue atendid@ por un asesor?</string>
+    <string name="encuesta_p3">¿Su problema fue solucionado?</string>
+    <string name="encuesta_p4">¿Tiene algún comentario?</string>
+    <string name="encuesta_enviar">Enviar Calificación</string>
+    <string name="encuesta_si">Si</string>
+    <string name="encuesta_no">No</string>
+    <string name="encuesta_ayuda">Comentarios sobre la atención</string>
+    <string name="novedad_btn_detalle">Detalle</string>
+    <string name="novedad_btn_calificacion">Calificación</string>
+    <string name="ntipo">Tipo de novedad:</string>
+    <string name="nfecha">Fecha:</string>
+    <string name="ndireccion">Dirección:</string>
+    <string name="ndetalle">Detalle:</string>
+    <string name="nempresa">Empresa:</string>
+    <string name="nservcios_prestados">Servicios prestados:</string>
+    <string name="ncostos">Costos:</string>
+
 </resources>
