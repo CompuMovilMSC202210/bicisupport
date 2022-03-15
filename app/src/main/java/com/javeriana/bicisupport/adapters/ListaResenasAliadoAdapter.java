@@ -34,7 +34,7 @@ public class ListaResenasAliadoAdapter extends ArrayAdapter<String> {
         LayoutInflater inflater = context.getLayoutInflater();
         View rowView = inflater.inflate(R.layout.vista_resena_lista, null, true);
 
-        TextView nombreUsuarioText = rowView.findViewById(R.id.listaResenas_nombreUsuario);
+        TextView nombreUsuarioText = rowView.findViewById(R.id.listaAliados_nombreAliado);
         TextView fechaResenaText = rowView.findViewById(R.id.listaResenas_fechaResena);
         TextView descripcionResenaText = rowView.findViewById(R.id.listaResenas_descripcionResena);
 

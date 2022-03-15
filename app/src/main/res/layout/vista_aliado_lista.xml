@@ -14,6 +14,7 @@
             android:id="@+id/imagen_aliado"
             android:layout_width="115dp"
             android:layout_height="92dp"
+            android:src="@drawable/profile"
             android:padding="5dp" />
 
         <RelativeLayout
@@ -27,13 +28,13 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/listaResenas_nombreUsuario"
+                    android:id="@+id/listaAliados_nombreAliado"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
                     android:padding="2dp"
-                    android:text="Nombre aliado"
+                    android:text="@string/listaAliados_nombreAliado"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#4d4d4d"
                     android:textStyle="bold" />
@@ -43,7 +44,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="direccion aliado" />
+                    android:text="@string/listaAliados_direccionAliado" />
 
                 <RatingBar
                     style="?android:attr/ratingBarStyleSmall"
@@ -56,7 +57,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="Descripcion servicios" />
+                    android:text="@string/listaAliados_descripcionServicios" />
 
             </LinearLayout>
 
@@ -66,7 +67,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_toRightOf="@+id/linearDatosAliado"
                 android:gravity="right"
-                android:text="Tipo de aliado" />
+                android:text="@string/listaAliados_tipoAliado" />
         </RelativeLayout>
     </LinearLayout>
 
@@ -95,7 +96,7 @@
             android:layout_margin="3dp"
             android:layout_weight="0.3"
             android:backgroundTint="#FFFFFF"
-            android:text="detalles"
+            android:text="@string/listaAliados_botonDetalles"
             android:textAllCaps="false"
             android:textSize="12sp"
             android:textColor="#00239E" />
@@ -107,7 +108,7 @@
             android:layout_margin="3dp"
             android:layout_weight="0.3"
             android:backgroundTint="#FFFFFF"
-            android:text="Reseñas"
+            android:text="@string/listaAliados_botonResenas"
             android:textAllCaps="false"
             android:textSize="12sp"
             android:textColor="#00239E"/>

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="16dp"
-        android:text="TextView"
+        android:text="@string/listaResenas_titulo"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -21,12 +21,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/buttonAllReviews"
+        android:id="@+id/listaResenas_buttonAllReviews"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="48dp"
-        android:text="Todas"
+        android:text="@string/listaResenas_botonTodas"
         android:textAllCaps="false"
         app:layout_constraintStart_toStartOf="parent"
         android:backgroundTint="#FFFFFF"
@@ -34,26 +34,26 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/buttonPositiveReviews"
+        android:id="@+id/listaResenas_buttonPositiveReviews"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="48dp"
-        android:text="Positivas"
-        app:layout_constraintStart_toEndOf="@+id/buttonAllReviews"
+        android:text="@string/listaResenas_botonPositivas"
+        app:layout_constraintStart_toEndOf="@+id/listaResenas_buttonAllReviews"
         android:textAllCaps="false"
         android:backgroundTint="#FFFFFF"
         android:textColor="#00239E"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/buttonNegativeReviews"
+        android:id="@+id/listaResenas_buttonNegativeReviews"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="48dp"
-        android:text="Negativas"
-        app:layout_constraintStart_toEndOf="@+id/buttonPositiveReviews"
+        android:text="@string/listaResenas_negativas"
+        app:layout_constraintStart_toEndOf="@+id/listaResenas_buttonPositiveReviews"
         android:textAllCaps="false"
         android:backgroundTint="#FFFFFF"
         android:textColor="#00239E"
@@ -66,7 +66,7 @@
         android:layout_margin="10dp"
         android:layout_marginTop="8dp"
         android:background="@color/white"
-        app:layout_constraintTop_toBottomOf="@+id/buttonPositiveReviews"
+        app:layout_constraintTop_toBottomOf="@+id/listaResenas_buttonPositiveReviews"
         tools:layout_editor_absoluteX="10dp" />
 
     <ListView

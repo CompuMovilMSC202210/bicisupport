@@ -1,7 +1,6 @@
 package com.javeriana.bicisupport.adapters;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +39,7 @@ public class ListaAliadosAdapter extends ArrayAdapter<String> {
         LayoutInflater inflater=context.getLayoutInflater();
         View rowView=inflater.inflate(R.layout.vista_aliado_lista, null,true);
 
-        TextView nombreAliadoText =  rowView.findViewById(R.id.listaResenas_nombreUsuario);
+        TextView nombreAliadoText =  rowView.findViewById(R.id.listaAliados_nombreAliado);
         TextView direccionAliadoText =  rowView.findViewById(R.id.listaAliados_direccionAliado);
         TextView descripcionAliadoText =  rowView.findViewById(R.id.listaResenas_descripcionResena);
         Button botonDetalle = rowView.findViewById(R.id.listaAliado_Detalle);

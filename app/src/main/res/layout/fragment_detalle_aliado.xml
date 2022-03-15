@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="30dp"
         android:text="@string/detalleAliado_nombreAliado"
         android:textColor="#FDFCFC"
         android:textStyle="bold"
@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="30dp"
         android:text="@string/detalleAliado_tipoAliado"
         android:textColor="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,9 +56,10 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/profile"
+        android:layout_marginTop="42dp"
         android:layout_marginEnd="28dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -77,15 +78,27 @@
         app:layout_constraintTop_toBottomOf="@+id/textDireccionAliado" />
 
     <TextView
+        android:id="@+id/textServicio1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="2dp"
+        android:text="@string/detalleAliado_Servicios"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textServiciosPrestados" />
+
+    <TextView
         android:id="@+id/textUbicacionMapa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="304dp"
+        android:layout_marginTop="100dp"
         android:text="@string/detalleAliado_ubicacionMapa"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textServiciosPrestados" />
+
 
     <RatingBar
         android:id="@+id/ratingBar"
