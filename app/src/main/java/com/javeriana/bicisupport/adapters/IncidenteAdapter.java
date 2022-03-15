@@ -1,4 +1,4 @@
-package com.javeriana.bicisupport.Adapter;
+package com.javeriana.bicisupport.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,8 +12,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.javeriana.bicisupport.DetalleIncidente;
+import com.javeriana.bicisupport.activities.HomeActivity;
+import com.javeriana.bicisupport.fragments.ChatEvaluationFragment;
+import com.javeriana.bicisupport.fragments.IncidentDetailFragment;
 import com.javeriana.bicisupport.models.Incident;
 import com.javeriana.bicisupport.R;
 
@@ -45,21 +49,24 @@ public class IncidenteAdapter extends ArrayAdapter<Incident> {
         Button detalle = convertView.findViewById(R.id.lbtndetalle);
         Button calificacion = convertView.findViewById(R.id.lbtncalificacion);
 
-        tvTitulo.setText("Novedad N. "+String.valueOf(incidents.get(position).getNumero()));
+        tvTitulo.setText(String.format("Novedad N. %s", incidents.get(position).getNumero()));
         tvTNovedad.setText(incidents.get(position).getNovedad());
         tvDireccion.setText(incidents.get(position).getDireccion());
         etFecha.setText(incidents.get(position).getFecha());
         etdetalle.setText(incidents.get(position).getDetalle());
 
-        detalle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                context.startActivity(new Intent(context, DetalleIncidente.class).putExtra("incidente", incidents.get(position)));
-            }
+        detalle.setOnClickListener(view -> {
+            IncidentDetailFragment fragment = new IncidentDetailFragment();
+            FragmentTransaction fragmentTransaction = ((HomeActivity) context).getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragmentContainerView, fragment).commit();
+            // context.startActivity(new Intent(context, DetalleIncidente.class).putExtra("incidente", incidents.get(position)));
         });
 
-
-
+        calificacion.setOnClickListener(view -> {
+            ChatEvaluationFragment fragment = new ChatEvaluationFragment();
+            FragmentTransaction fragmentTransaction = ((HomeActivity) context).getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragmentContainerView, fragment).commit();
+        });
       return convertView;
     }
 

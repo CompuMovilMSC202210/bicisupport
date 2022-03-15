@@ -9,8 +9,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.javeriana.bicisupport.R;
+import com.javeriana.bicisupport.models.Incident;
 
 import java.util.Objects;
 
@@ -29,6 +32,10 @@ public class IncidentDetailFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    Incident incident;
+    TextView novedad, fecha, direccion, detalle, empresa, titulo;
+    EditText costos, servicios;
 
     public IncidentDetailFragment() {
         // Required empty public constructor
@@ -64,7 +71,32 @@ public class IncidentDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.fragment_incident_detail, container, false);
+        
         Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setTitle(HtmlCompat.fromHtml("<font color='#00239E'>Detalle novedad</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+
+        Bundle obtenerobjeto = getActivity().getIntent().getExtras();
+
+        if (obtenerobjeto != null){
+            incident =(Incident) obtenerobjeto.getSerializable("incidente");
+            titulo = root.findViewById(R.id.nNumeronovedad);
+            novedad = root.findViewById(R.id.ntipo);
+            fecha = root.findViewById(R.id.nfecha);
+            direccion = root.findViewById(R.id.ndireccion);
+            detalle = root.findViewById(R.id.ndetalle);
+            empresa = root.findViewById(R.id.nempresa);
+            costos = root.findViewById(R.id.ncosto);
+            servicios = root.findViewById(R.id.nservicios);
+
+            titulo.setText("Novedad N."+ incident.getNumero());
+            novedad.setText(incident.getNovedad());
+            fecha.setText(incident.getFecha());
+            direccion.setText(incident.getDireccion());
+            detalle.setText(incident.getDetalle());
+            empresa.setText(incident.getEmpresa());
+            costos.setText(incident.getCostos().toString());
+            servicios.setText(incident.getServiciosp());
+        }
 
         return inflater.inflate(R.layout.fragment_incident_detail, container, false);
     }

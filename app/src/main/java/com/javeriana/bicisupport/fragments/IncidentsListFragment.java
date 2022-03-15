@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.javeriana.bicisupport.Adapter.IncidenteAdapter;
+import com.javeriana.bicisupport.adapters.IncidenteAdapter;
 import com.javeriana.bicisupport.R;
 import com.javeriana.bicisupport.models.Incident;
 import com.javeriana.bicisupport.utils.Utils;
