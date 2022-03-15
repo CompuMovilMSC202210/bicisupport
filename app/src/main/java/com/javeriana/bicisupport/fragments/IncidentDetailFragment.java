@@ -1,21 +1,22 @@
 package com.javeriana.bicisupport.fragments;
 
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.text.HtmlCompat;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.text.HtmlCompat;
+import androidx.fragment.app.Fragment;
+
 import com.javeriana.bicisupport.R;
 import com.javeriana.bicisupport.models.Incident;
+import com.javeriana.bicisupport.utils.Utils;
 
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -72,32 +73,35 @@ public class IncidentDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_incident_detail, container, false);
-        
+
         Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setTitle(HtmlCompat.fromHtml("<font color='#00239E'>Detalle novedad</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
 
-        Bundle obtenerobjeto = getActivity().getIntent().getExtras();
+        titulo = root.findViewById(R.id.nNumeronovedad);
+        novedad = root.findViewById(R.id.ntipo);
+        fecha = root.findViewById(R.id.nfecha);
+        direccion = root.findViewById(R.id.ndireccion);
+        detalle = root.findViewById(R.id.ndetalle);
+        empresa = root.findViewById(R.id.nempresa);
+        costos = root.findViewById(R.id.ncosto);
+        servicios = root.findViewById(R.id.nservicios);
 
-        if (obtenerobjeto != null){
-            incident =(Incident) obtenerobjeto.getSerializable("incidente");
-            titulo = root.findViewById(R.id.nNumeronovedad);
-            novedad = root.findViewById(R.id.ntipo);
-            fecha = root.findViewById(R.id.nfecha);
-            direccion = root.findViewById(R.id.ndireccion);
-            detalle = root.findViewById(R.id.ndetalle);
-            empresa = root.findViewById(R.id.nempresa);
-            costos = root.findViewById(R.id.ncosto);
-            servicios = root.findViewById(R.id.nservicios);
+        Bundle args = getArguments();
+        String incidentJson = Optional.ofNullable(args.getString("incident"))
+                .orElse(null);
 
-            titulo.setText("Novedad N."+ incident.getNumero());
+        if (!Objects.isNull(incidentJson)) {
+            incident = Utils.getGsonParser().fromJson(incidentJson, Incident.class);
+
+            titulo.setText(String.format("Novedad N.%d", incident.getNumero()));
             novedad.setText(incident.getNovedad());
             fecha.setText(incident.getFecha());
             direccion.setText(incident.getDireccion());
             detalle.setText(incident.getDetalle());
             empresa.setText(incident.getEmpresa());
-            costos.setText(incident.getCostos().toString());
+            costos.setText(String.valueOf(incident.getCostos()));
             servicios.setText(incident.getServiciosp());
         }
 
-        return inflater.inflate(R.layout.fragment_incident_detail, container, false);
+        return root;
     }
 }

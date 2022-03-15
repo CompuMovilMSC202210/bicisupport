@@ -1,6 +1,7 @@
 package com.javeriana.bicisupport.adapters;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +14,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.javeriana.bicisupport.R;
 import com.javeriana.bicisupport.activities.HomeActivity;
 import com.javeriana.bicisupport.fragments.ChatEvaluationFragment;
 import com.javeriana.bicisupport.fragments.IncidentDetailFragment;
 import com.javeriana.bicisupport.models.Incident;
-import com.javeriana.bicisupport.R;
+import com.javeriana.bicisupport.utils.Utils;
 
 import java.util.ArrayList;
 
@@ -35,8 +37,8 @@ public class IncidenteAdapter extends ArrayAdapter<Incident> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        if(convertView == null){
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.novedadrow, parent,false);
+        if (convertView == null) {
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.novedadrow, parent, false);
         }
 
         TextView tvTitulo = convertView.findViewById(R.id.lnovedad);
@@ -55,9 +57,12 @@ public class IncidenteAdapter extends ArrayAdapter<Incident> {
 
         detalle.setOnClickListener(view -> {
             IncidentDetailFragment fragment = new IncidentDetailFragment();
+            Bundle incident = new Bundle();
+            String incidentString = Utils.getGsonParser().toJson(incidents.get(position));
+            incident.putString("incident", incidentString);
+            fragment.setArguments(incident);
             FragmentTransaction fragmentTransaction = ((HomeActivity) context).getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragmentContainerView, fragment).commit();
-            // context.startActivity(new Intent(context, DetalleIncidente.class).putExtra("incidente", incidents.get(position)));
         });
 
         calificacion.setOnClickListener(view -> {
@@ -65,7 +70,7 @@ public class IncidenteAdapter extends ArrayAdapter<Incident> {
             FragmentTransaction fragmentTransaction = ((HomeActivity) context).getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragmentContainerView, fragment).commit();
         });
-      return convertView;
+        return convertView;
     }
 
 
