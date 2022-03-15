@@ -18,5 +18,38 @@
     <string name="nempresa">Empresa:</string>
     <string name="nservcios_prestados">Servicios prestados:</string>
     <string name="ncostos">Costos:</string>
-
+    <string name="btitulo">Datos de la Bicicleta</string>
+    <string name="bmarca">Marca</string>
+    <string name="bcolor">Color</string>
+    <string name="bmodelo">Modelo</string>
+    <string name="btipo">Tipo</string>
+    <string name="bfoto">Cambiar Foto</string>
+    <string name="bactualizar">Actualizar Datos</string>
+    <string name="bmodeloq">RoadMaster</string>
+    <string-array name="bicicletas_marcas">
+        <item>Specialized</item>
+        <item>Trek</item>
+        <item>Scott Bikes</item>
+        <item>Cube Bikes</item>
+        <item>BCM bikes</item>
+        <item>Shimano</item>
+        <item>Sigma</item>
+    </string-array>
+    <string-array name="color_bicicletas">
+        <item>Rojo</item>
+        <item>Verde</item>
+        <item>Azul</item>
+        <item>Fucsia</item>
+        <item>Celeste</item>
+        <item>Violeta</item>
+        <item>Cafe</item>
+    </string-array>
+    <string-array name="tipo_bibicleta">
+        <item>Ruta</item>
+        <item>Triatlon </item>
+        <item>Ciclomontañismo</item>
+        <item>Cyclocross</item>
+        <item>Urbana</item>
+        <item>Hibridas</item>
+    </string-array>
 </resources>
