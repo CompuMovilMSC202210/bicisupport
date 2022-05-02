@@ -65,10 +65,10 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/loginButton"
                 android:layout_width="150dp"
-                android:layout_height="48dp"
+                android:layout_height="38dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/white_button"
+                android:background="@drawable/round_button"
                 android:text="@string/add_photo"
                 android:textColor="@color/project_blue"
                 android:textSize="13sp"
@@ -91,15 +91,16 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
             <EditText
-                android:id="@+id/editTextName"
+                android:id="@+id/edit_text_name"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="38dp"
                 android:layout_marginStart="60dp"
                 android:layout_marginTop="7dp"
                 android:layout_marginEnd="60dp"
                 android:background="@drawable/custom_edit_text_rounded"
                 android:ems="10"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textColor="@color/white" />
 
             <TextView
                 android:id="@+id/ModificarCuenta_LabelNombre"
@@ -113,15 +114,16 @@
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/emailText"
+                android:id="@+id/edit_text_user"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="38dp"
                 android:layout_marginStart="60dp"
                 android:layout_marginTop="7dp"
                 android:layout_marginEnd="60dp"
                 android:background="@drawable/custom_edit_text_rounded"
                 android:ems="10"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textColor="@color/white" />
 
             <TextView
                 android:id="@+id/textView3"
@@ -135,15 +137,16 @@
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/editTextEmail"
+                android:id="@+id/edit_text_email"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="38dp"
                 android:layout_marginStart="60dp"
                 android:layout_marginTop="7dp"
                 android:layout_marginEnd="60dp"
                 android:background="@drawable/custom_edit_text_rounded"
                 android:ems="10"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:textColor="@color/white" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -157,15 +160,16 @@
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/passwordText"
+                android:id="@+id/edit_text_password"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="38dp"
                 android:layout_marginStart="60dp"
                 android:layout_marginTop="7dp"
                 android:layout_marginEnd="60dp"
                 android:background="@drawable/custom_edit_text_rounded"
                 android:ems="10"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:textColor="@color/white" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -179,24 +183,25 @@
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/editTextRepeatPassword"
+                android:id="@+id/edit_text_repeat_password"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="38dp"
                 android:layout_marginStart="60dp"
                 android:layout_marginTop="7dp"
                 android:layout_marginEnd="60dp"
                 android:background="@drawable/custom_edit_text_rounded"
                 android:ems="10"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:textColor="@color/white" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/nextButton"
+                android:id="@+id/btn_register_next"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="38dp"
                 android:layout_marginStart="60dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="60dp"
-                android:background="@drawable/white_button"
+                android:background="@drawable/round_button"
                 android:text="@string/next"
                 android:textColor="@color/project_blue"
                 android:textStyle="bold"

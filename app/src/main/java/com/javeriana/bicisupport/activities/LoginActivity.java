@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -23,7 +22,6 @@ import com.javeriana.bicisupport.R;
 import com.javeriana.bicisupport.models.responses.LoginResponse;
 
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -46,8 +44,8 @@ public class LoginActivity extends AppCompatActivity {
 
         loginButton = findViewById(R.id.loginButton);
         register = findViewById(R.id.register_option);
-        emailText = findViewById(R.id.emailText);
-        passwordText = findViewById(R.id.passwordText);
+        emailText = findViewById(R.id.edit_text_user);
+        passwordText = findViewById(R.id.edit_text_password);
 
         prefs = getSharedPreferences(this.getString(R.string.app_name), Context.MODE_PRIVATE);
         editor = prefs.edit();
