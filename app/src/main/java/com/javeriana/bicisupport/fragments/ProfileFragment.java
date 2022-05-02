@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +25,8 @@ import com.javeriana.bicisupport.activities.HomeActivity;
 import com.javeriana.bicisupport.activities.LoginActivity;
 import com.javeriana.bicisupport.utils.Utils;
 
+import org.json.JSONObject;
+
 import java.util.Objects;
 
 public class ProfileFragment extends Fragment {
@@ -39,6 +40,7 @@ public class ProfileFragment extends Fragment {
 
     RequestQueue requestQueue;
     String biciType, biciBrand, biciColor;
+    Integer biciModel;
 
 
     public ProfileFragment() {
@@ -77,9 +79,7 @@ public class ProfileFragment extends Fragment {
         getUserData(root);
 
         logout.setOnClickListener(view -> {
-            editor.remove("token");
-            editor.remove("localId");
-
+            editor.clear();
             editor.commit();
 
             startActivity(new Intent(view.getContext(), LoginActivity.class));
@@ -95,7 +95,7 @@ public class ProfileFragment extends Fragment {
             fragmentTransaction.replace(R.id.fragmentContainerView, fragment).commit();
         });
 
-        editProfile.setOnClickListener(View -> {
+        editProfile.setOnClickListener(view -> {
             ModifyProfileFragment modifyProfileFragment = new ModifyProfileFragment();
             FragmentTransaction fragmentTransaction = ((HomeActivity) getContext()).getSupportFragmentManager().beginTransaction();
 
@@ -115,10 +115,27 @@ public class ProfileFragment extends Fragment {
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> {
-                    String info = String.format("%s\n\n%s",
-                            Utils.getValueFromJsonObjectByName(response, "name"),
-                            Utils.getValueFromJsonObjectByName(response, "user"));
+                    JSONObject bici = Utils.getJsonObjectValueFromJsonObjectByName(response, "bici");
 
+                    String name = Utils.getStringValueFromJsonObjectByName(response, "name");
+                    String user = Utils.getStringValueFromJsonObjectByName(response, "user");
+
+                    biciType = Utils.getStringValueFromJsonObjectByName(bici, "type");
+                    biciBrand = Utils.getStringValueFromJsonObjectByName(bici, "brand");
+                    biciColor = Utils.getStringValueFromJsonObjectByName(bici, "color");
+                    biciModel = Utils.getIntValueFromJsonObjectByName(bici, "model");
+
+                    editor.putString("userName", name);
+                    editor.putString("userUser", user);
+
+                    editor.putString("biciType", biciType);
+                    editor.putString("biciBrand", biciBrand);
+                    editor.putString("biciColor", biciColor);
+                    editor.putInt("biciModel", biciModel);
+
+                    editor.commit();
+
+                    String info = String.format("%s\n\n%s", name, user);
                     infoTextView.setText(info);
                 },
                 error -> {

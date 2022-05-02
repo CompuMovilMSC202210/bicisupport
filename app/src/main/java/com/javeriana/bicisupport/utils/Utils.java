@@ -15,21 +15,21 @@ public class Utils {
     private static Gson gson;
 
     public static Gson getGsonParser() {
-        if(null == gson) {
+        if (null == gson) {
             GsonBuilder builder = new GsonBuilder();
             gson = builder.create();
         }
         return gson;
     }
 
-    public static String loadJson(InputStream is){
+    public static String loadJson(InputStream is) {
         String json;
-        try{
+        try {
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
             is.close();
-            json= new String(buffer, StandardCharsets.UTF_8);
+            json = new String(buffer, StandardCharsets.UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -37,11 +37,27 @@ public class Utils {
         return json;
     }
 
-    public static String getValueFromJsonObjectByName(JSONObject jsonObject, String name) {
+    public static String getStringValueFromJsonObjectByName(JSONObject jsonObject, String name) {
         try {
             return jsonObject.getString(name);
         } catch (JSONException e) {
             return "No data";
+        }
+    }
+
+    public static Integer getIntValueFromJsonObjectByName(JSONObject jsonObject, String name) {
+        try {
+            return jsonObject.getInt(name);
+        } catch (JSONException e) {
+            return null;
+        }
+    }
+
+    public static JSONObject getJsonObjectValueFromJsonObjectByName(JSONObject jsonObject, String name) {
+        try {
+            return jsonObject.getJSONObject(name);
+        } catch (JSONException e) {
+            return null;
         }
     }
 }
