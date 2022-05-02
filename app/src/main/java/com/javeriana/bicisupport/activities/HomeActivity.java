@@ -78,6 +78,14 @@ public class HomeActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void onBackPressed() {
+        MapFragment mapFragment = new MapFragment();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+
+        fragmentTransaction.replace(R.id.fragmentContainerView, mapFragment).commit();
+    }
+
     public void onClickMap(MenuItem item) {
         MapFragment mapFragment = new MapFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
