@@ -1,6 +1,8 @@
 package com.javeriana.bicisupport.fragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +25,9 @@ public class ProfileFragment extends Fragment {
     Button logout, biciDetails, novedades;
     Button editProfile;
 
+    SharedPreferences prefs;
+    SharedPreferences.Editor editor;
+
     public ProfileFragment() {
     }
 
@@ -40,6 +45,9 @@ public class ProfileFragment extends Fragment {
 
         biciDetails = root.findViewById(R.id.bici_details);
 
+        prefs = getActivity().getSharedPreferences(this.getString(R.string.app_name), Context.MODE_PRIVATE);
+        editor = prefs.edit();
+
         biciDetails.setOnClickListener(view -> {
             DetailBikeFragment detailBikeFragment = new DetailBikeFragment();
             FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
@@ -52,7 +60,14 @@ public class ProfileFragment extends Fragment {
         novedades = root.findViewById(R.id.novedades);
         editProfile = root.findViewById(R.id.edit_profile);
 
-        logout.setOnClickListener(view -> startActivity(new Intent(view.getContext(), LoginActivity.class)));
+        logout.setOnClickListener(view -> {
+            editor.remove("token");
+            editor.remove("localId");
+
+            editor.commit();
+
+            startActivity(new Intent(view.getContext(), LoginActivity.class));
+        });
         biciDetails.setOnClickListener(view -> {
             DetailBikeFragment fragment = new DetailBikeFragment();
             FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();

@@ -91,7 +91,7 @@
     <string name="listaResenas_negativas">Negativas</string>
 
     <string name="login_text">Iniciar Sesión</string>
-    <string name="user_text">Usuario</string>
+    <string name="user_text">Email</string>
     <string name="password_text">Contraseña</string>
     <string name="go_to_register">No tienes cuenta? <u>Registrate aquí</u></string>
     <string name="go_to_login">Ya tienes cuenta? <u>Inicia sesión aquí</u></string>

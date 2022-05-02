@@ -113,7 +113,7 @@
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/editTextUser"
+                android:id="@+id/emailText"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginStart="60dp"
@@ -157,7 +157,7 @@
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/editTextPassword"
+                android:id="@+id/passwordText"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginStart="60dp"

@@ -46,7 +46,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
-        android:id="@+id/editTextUser"
+        android:id="@+id/emailText"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginStart="60dp"
@@ -72,10 +72,10 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextUser" />
+        app:layout_constraintTop_toBottomOf="@+id/emailText" />
 
     <EditText
-        android:id="@+id/editTextPassword"
+        android:id="@+id/passwordText"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginStart="60dp"
@@ -103,7 +103,7 @@
         app:backgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordText" />
 
     <TextView
         android:id="@+id/register_option"
