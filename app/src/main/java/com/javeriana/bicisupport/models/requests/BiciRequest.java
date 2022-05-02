@@ -2,12 +2,21 @@ package com.javeriana.bicisupport.models.requests;
 
 public class BiciRequest {
 
+    private String biciImageUrl;
     private String brand;
     private int model;
     private String color;
     private String type;
 
     public BiciRequest(String brand, int model, String color, String type) {
+        this.brand = brand;
+        this.model = model;
+        this.color = color;
+        this.type = type;
+    }
+
+    public BiciRequest(String biciImageUrl, String brand, int model, String color, String type) {
+        this.biciImageUrl = biciImageUrl;
         this.brand = brand;
         this.model = model;
         this.color = color;
@@ -44,5 +53,13 @@ public class BiciRequest {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getBiciImageUrl() {
+        return biciImageUrl;
+    }
+
+    public void setBiciImageUrl(String biciImageUrl) {
+        this.biciImageUrl = biciImageUrl;
     }
 }

@@ -131,6 +131,7 @@ public class ProfileFragment extends Fragment {
                     biciBrand = Utils.getStringValueFromJsonObjectByName(bici, "brand");
                     biciColor = Utils.getStringValueFromJsonObjectByName(bici, "color");
                     biciModel = Utils.getIntValueFromJsonObjectByName(bici, "model");
+                    String biciImageUrl = Utils.getStringValueFromJsonObjectByName(bici, "biciImageUrl");
 
                     editor.putString("userName", name);
                     editor.putString("userUser", user);
@@ -140,6 +141,7 @@ public class ProfileFragment extends Fragment {
                     editor.putString("biciBrand", biciBrand);
                     editor.putString("biciColor", biciColor);
                     editor.putInt("biciModel", biciModel);
+                    editor.putString("biciImageUrl", biciImageUrl);
 
                     editor.commit();
 
