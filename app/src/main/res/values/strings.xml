@@ -110,8 +110,8 @@
     <string name="model">Modelo</string>
     <string name="type">Tipo</string>
     <string name="end_register">Finalizar registro</string>
-    <string name="details">Nombre\n\nUsuario\n\nEmail</string>
-    <string name="example_details">Nombre\n\nUsuario\n\nEmail</string>
+    <string name="details">Nombre\n\nUsuario</string>
+    <string name="example_details">Nombre\n\nUsuario</string>
     <string name="edit_profile">Editar perfil</string>
     <string name="bici_details">Editar datos de la bici</string>
     <string name="ver_novedades">Mis novedades</string>

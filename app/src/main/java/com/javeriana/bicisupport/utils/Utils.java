@@ -3,6 +3,9 @@ package com.javeriana.bicisupport.utils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -32,5 +35,13 @@ public class Utils {
             return null;
         }
         return json;
+    }
+
+    public static String getValueFromJsonObjectByName(JSONObject jsonObject, String name) {
+        try {
+            return jsonObject.getString(name);
+        } catch (JSONException e) {
+            return "No data";
+        }
     }
 }

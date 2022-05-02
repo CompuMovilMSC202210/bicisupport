@@ -22,9 +22,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.javeriana.bicisupport.R;
 import com.javeriana.bicisupport.models.requests.BiciRequest;
-import com.javeriana.bicisupport.models.requests.CredentialsRequest;
 import com.javeriana.bicisupport.models.requests.UserRequest;
-import com.javeriana.bicisupport.models.responses.LoginResponse;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,7 +37,6 @@ public class BicycleRegisterActivity extends AppCompatActivity implements Adapte
     String token, localId, name, username, brand, type, color;
     SharedPreferences prefs;
     SharedPreferences.Editor editor;
-    UserRequest user;
 
     RequestQueue requestQueue;
 
