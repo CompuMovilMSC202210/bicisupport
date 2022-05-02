@@ -1,8 +1,6 @@
 package com.javeriana.bicisupport.activities;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,8 +32,6 @@ public class UserRegisterActivity extends AppCompatActivity {
     EditText nameEditText, userEditText, emailEditText, passwordEditText, repeatPasswordEditText;
 
     RequestQueue requestQueue;
-    SharedPreferences prefs;
-    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +39,6 @@ public class UserRegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_register);
 
         Objects.requireNonNull(getSupportActionBar()).hide();
-
-        prefs = getSharedPreferences(this.getString(R.string.app_name), Context.MODE_PRIVATE);
-        editor = prefs.edit();
 
         next = findViewById(R.id.btn_register_next);
         login = findViewById(R.id.login_option);
@@ -107,14 +100,15 @@ public class UserRegisterActivity extends AppCompatActivity {
 
         StringRequest request = new StringRequest(Request.Method.POST, baseRegisterUrl,
                 response -> {
+                    Intent intent = new Intent(UserRegisterActivity.this, BicycleRegisterActivity.class);
                     LoginResponse loginResponse = new Gson().fromJson(response, LoginResponse.class);
 
-                    editor.putString("token", loginResponse.getToken());
-                    editor.putString("localId", loginResponse.getLocalId());
+                    intent.putExtra("token", loginResponse.getToken());
+                    intent.putExtra("localId", loginResponse.getLocalId());
+                    intent.putExtra("name", name);
+                    intent.putExtra("user", user);
 
-                    editor.commit();
-
-                    startActivity(new Intent(UserRegisterActivity.this, BicycleRegisterActivity.class));
+                    startActivity(intent);
                 },
                 error -> {
                     String errorMessage = handleRegisterAnswer(error.networkResponse.statusCode);

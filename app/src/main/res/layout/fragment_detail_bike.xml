@@ -68,7 +68,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
             <Spinner
-                android:id="@+id/spinnerBrand"
+                android:id="@+id/spinner_brand"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginStart="60dp"
@@ -92,7 +92,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
             <Spinner
-                android:id="@+id/spinnerColor"
+                android:id="@+id/spinner_color"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginStart="60dp"
@@ -117,7 +117,7 @@
 
 
             <EditText
-                android:id="@+id/editTextModel"
+                android:id="@+id/edit_text_model"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginStart="60dp"
@@ -140,7 +140,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
             <Spinner
-                android:id="@+id/spinnerType"
+                android:id="@+id/spinner_type"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginStart="60dp"
