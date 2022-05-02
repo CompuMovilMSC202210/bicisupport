@@ -34,7 +34,7 @@ public class BicycleRegisterActivity extends AppCompatActivity implements Adapte
     Spinner brandSpinner, typeSpinner, colorSpinner;
     EditText modelEditText;
 
-    String token, localId, name, username, brand, type, color;
+    String token, localId, name, username, brand, type, color, imageUrl;
     SharedPreferences prefs;
     SharedPreferences.Editor editor;
 
@@ -75,6 +75,7 @@ public class BicycleRegisterActivity extends AppCompatActivity implements Adapte
         localId = getIntent().getStringExtra("localId");
         name = getIntent().getStringExtra("name");
         username = getIntent().getStringExtra("user");
+        imageUrl = getIntent().getStringExtra("imageUrl");
 
         brandSpinner.setOnItemSelectedListener(this);
         colorSpinner.setOnItemSelectedListener(this);

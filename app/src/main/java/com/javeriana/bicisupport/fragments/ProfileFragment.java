@@ -3,11 +3,15 @@ package com.javeriana.bicisupport.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -34,6 +38,7 @@ public class ProfileFragment extends Fragment {
     Button logout, biciDetails, novedades;
     Button editProfile;
     TextView infoTextView;
+    ImageView profilePicture;
 
     SharedPreferences prefs;
     SharedPreferences.Editor editor;
@@ -60,6 +65,7 @@ public class ProfileFragment extends Fragment {
 
         biciDetails = root.findViewById(R.id.bici_details);
         infoTextView = root.findViewById(R.id.infoTextEdit);
+        profilePicture = root.findViewById(R.id.profile_details_picture);
 
         prefs = getActivity().getSharedPreferences(this.getString(R.string.app_name), Context.MODE_PRIVATE);
         editor = prefs.edit();
@@ -119,6 +125,7 @@ public class ProfileFragment extends Fragment {
 
                     String name = Utils.getStringValueFromJsonObjectByName(response, "name");
                     String user = Utils.getStringValueFromJsonObjectByName(response, "user");
+                    String imageUrl = Utils.getStringValueFromJsonObjectByName(response, "imageUrl");
 
                     biciType = Utils.getStringValueFromJsonObjectByName(bici, "type");
                     biciBrand = Utils.getStringValueFromJsonObjectByName(bici, "brand");
@@ -127,6 +134,7 @@ public class ProfileFragment extends Fragment {
 
                     editor.putString("userName", name);
                     editor.putString("userUser", user);
+                    editor.putString("imageUrl", imageUrl);
 
                     editor.putString("biciType", biciType);
                     editor.putString("biciBrand", biciBrand);
@@ -135,6 +143,12 @@ public class ProfileFragment extends Fragment {
 
                     editor.commit();
 
+                    if (!imageUrl.equals("")) {
+                        byte[] imageBytes;
+                        imageBytes = Base64.decode(imageUrl, Base64.DEFAULT);
+                        Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+                        profilePicture.setImageBitmap(decodedImage);
+                    }
                     String info = String.format("%s\n\n%s", name, user);
                     infoTextView.setText(info);
                 },

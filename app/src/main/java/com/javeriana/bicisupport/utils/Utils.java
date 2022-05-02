@@ -41,7 +41,7 @@ public class Utils {
         try {
             return jsonObject.getString(name);
         } catch (JSONException e) {
-            return "No data";
+            return "";
         }
     }
 

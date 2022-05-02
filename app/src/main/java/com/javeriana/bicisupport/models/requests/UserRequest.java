@@ -13,6 +13,12 @@ public class UserRequest {
         this.user = user;
     }
 
+    public UserRequest(String imageUrl, String name, String user) {
+        this.imageUrl = imageUrl;
+        this.name = name;
+        this.user = user;
+    }
+
     public UserRequest(String imageUrl, String localId, String name, String user) {
         this.imageUrl = imageUrl;
         this.localId = localId;

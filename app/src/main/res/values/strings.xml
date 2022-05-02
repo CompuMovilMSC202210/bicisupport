@@ -99,6 +99,7 @@
     <string name="user_data">Datos del usuario</string>
     <string name="bici_data">Datos de la bici</string>
     <string name="add_photo">Agregar foto</string>
+    <string name="gallery_text">Galeria</string>
     <string name="name">Nombre</string>
     <string name="user">Usuario</string>
     <string name="next">Siguiente</string>
@@ -150,4 +151,5 @@
     <string name="color_bike">Color</string>
     <string name="model_bike">Modelo</string>
     <string name="type_bike">Tipo</string>
+    <string name="camera_text">Camara</string>
 </resources>
