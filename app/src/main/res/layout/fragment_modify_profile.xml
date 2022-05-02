@@ -18,20 +18,43 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/ModificarCuenta_cambiarFoto"
+    <LinearLayout
+        android:id="@+id/linear_layout_photo_buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="60dp"
-        android:gravity="center"
-        android:text="@string/modificarCuenta_cambiarFoto"
-        android:textColor="@color/white"
-        android:textSize="14sp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ModificarCuenta_imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/ModificarCuenta_imageView">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/details_gallery_button"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/round_button"
+            android:text="@string/gallery_text"
+            android:textColor="@color/project_blue"
+            android:textSize="13sp"
+            app:backgroundTint="@color/white" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/details_camera_button"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="60dp"
+            android:layout_weight="1"
+            android:background="@drawable/round_button"
+            android:text="@string/camera_text"
+            android:textColor="@color/project_blue"
+            android:textSize="13sp"
+            app:backgroundTint="@color/white" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/ModificarCuenta_LabelNombre"
@@ -45,7 +68,7 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ModificarCuenta_cambiarFoto" />
+        app:layout_constraintTop_toBottomOf="@+id/linear_layout_photo_buttons" />
 
     <EditText
         android:id="@+id/ModificarCuenta_editTextNombre"
