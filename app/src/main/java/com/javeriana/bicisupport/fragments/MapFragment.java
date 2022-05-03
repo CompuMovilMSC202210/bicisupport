@@ -242,7 +242,7 @@ public class MapFragment extends Fragment {
                     latitude = location.getLatitude();
                     longitude = location.getLongitude();
                     startPoint = new GeoPoint(latitude, longitude);
-                    writeJSONObject();
+                    writeJSONObject(latitude, longitude);
                 }
             }
         };
@@ -523,11 +523,11 @@ public class MapFragment extends Fragment {
         });
     }
 
-    private void writeJSONObject() {
+    private void writeJSONObject(double latitude, double longitude) {
         MyLocation myLocation = new MyLocation();
         myLocation.setFecha(new Date(System.currentTimeMillis()));
-        myLocation.setLatitud(myLocationOverlay.getMyLocation().getLatitude());
-        myLocation.setLongitud(myLocationOverlay.getMyLocation().getLongitude());
+        myLocation.setLatitud(latitude);
+        myLocation.setLongitud(longitude);
         localizaciones.put(myLocation.toJSON());
         Writer output = null;
         String filename = "locations.json";
