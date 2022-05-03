@@ -30,6 +30,7 @@ import androidx.fragment.app.Fragment;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -54,7 +55,9 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.javeriana.bicisupport.R;
+import com.javeriana.bicisupport.models.MyLocation;
 
+import org.json.JSONArray;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.bonuspack.location.NominatimPOIProvider;
 import org.osmdroid.bonuspack.location.POI;
@@ -74,8 +77,13 @@ import org.osmdroid.views.overlay.Polyline;
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -89,15 +97,22 @@ public class MapFragment extends Fragment {
     private LocationCallback mLocationCallback;
     double latitude;
     double longitude;
+    double destinationLatitude;
+    double destinationLongitude;
     private GeoPoint startPoint;
     MyLocationNewOverlay myLocationOverlay;
     Button botonLocalizar;
     Button botonCapas;
+    Button botonDirecciones;
     boolean settingsOK = false;
 
     RoadManager roadManager;
     Polyline roadOverlay;
+    FolderOverlay poiMarkers;
+    FolderOverlay directionMarkers;
     Marker longPressedMarker;
+
+    private JSONArray localizaciones = new JSONArray();
 
     //Obtener permiso de localizacion
     ActivityResultLauncher<String> getLocationPermission = registerForActivityResult(
@@ -153,6 +168,7 @@ public class MapFragment extends Fragment {
 
         botonLocalizar = root.findViewById(R.id.buttonlocalizar);
         botonCapas = root.findViewById(R.id.buttonLayers);
+        botonDirecciones = root.findViewById(R.id.buttonDirecciones);
 
         map = new MapView(ctx);
         map.setTileSource(TileSourceFactory.MAPNIK);
@@ -180,7 +196,7 @@ public class MapFragment extends Fragment {
                     latitude = location.getLatitude();
                     longitude = location.getLongitude();
                     startPoint = new GeoPoint(latitude, longitude);
-                    //writeJSONObject();
+                    writeJSONObject();
                 }
             }
         };
@@ -217,14 +233,14 @@ public class MapFragment extends Fragment {
             public void onClick(View view) {
                 getLocationPermission.launch(Manifest.permission.ACCESS_FINE_LOCATION);
                 checkLocationSettings();
-                mapController.setCenter(startPoint);
+                mapController.animateTo(startPoint);
             }
         });
 
         botonCapas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PopupMenu popupMenu = new PopupMenu(getActivity(), view);
+                PopupMenu popupMenu = new PopupMenu(getActivity(), view, Gravity.LEFT);
                 popupMenu.getMenuInflater().inflate(R.menu.mapmenu_popup, popupMenu.getMenu());
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
@@ -238,12 +254,30 @@ public class MapFragment extends Fragment {
                                 buscarCercanos("bicycle_parking");
                                 Log.i("MAPS", "parqueaderos selecionado");
                                 return true;
+                            case R.id.mostrarHistorico:
+                                Log.i("MAPS", "Historico seleccionado");
                             default:
                                 return false;
                         }
                     }
                 });
                 popupMenu.show();
+            }
+        });
+
+        botonDirecciones.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getLocationPermission.launch(Manifest.permission.ACCESS_FINE_LOCATION);
+                checkLocationSettings();
+                if (settingsOK) {
+                    GeoPoint start = new GeoPoint(myLocationOverlay.getMyLocation());
+                    GeoPoint finish = new GeoPoint(destinationLatitude, destinationLongitude);
+                    drawRoute(start, finish);
+                } else {
+                    Toast.makeText(getActivity().getApplicationContext(), "Por favor encienda el GPS", Toast.LENGTH_LONG).show();
+                }
+
             }
         });
 
@@ -284,6 +318,7 @@ public class MapFragment extends Fragment {
         MapEventsOverlay overlayEventos = new MapEventsOverlay(new MapEventsReceiver() {
             @Override
             public boolean singleTapConfirmedHelper(GeoPoint p) {
+                Log.i("MAP", "marcador?");
                 return false;
             }
             @Override
@@ -315,18 +350,23 @@ public class MapFragment extends Fragment {
         if(longPressedMarker!=null){
             map.getOverlays().remove(longPressedMarker);
         }
-
         try {
 
             List<Address> addresses = mGeocoder.getFromLocation(p.getLatitude(), p.getLongitude(), 2);
             Address addressResult = addresses.get(0);
             longPressedMarker = createMarker(p, addressResult.getAddressLine(0), null, R.drawable.ic_baseline_person_pin_circle_24);
+            longPressedMarker.setOnMarkerClickListener(new Marker.OnMarkerClickListener() {
+                @Override
+                public boolean onMarkerClick(Marker marker, MapView mapView) {
+                    mapController.animateTo(new GeoPoint(p.getLatitude(), p.getLongitude()));
+                    marker.showInfoWindow();
+                    destinationLatitude = p.getLatitude();
+                    destinationLongitude = p.getLongitude();
+                    botonDirecciones.setVisibility(View.VISIBLE);
+                    return true;
+                }
+            });
             map.getOverlays().add(longPressedMarker);
-            if(settingsOK) {
-                GeoPoint start = new GeoPoint(myLocationOverlay.getMyLocation());
-                GeoPoint finish = new GeoPoint(p.getLatitude(), p.getLongitude());
-                drawRoute(start, finish);
-            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -334,6 +374,7 @@ public class MapFragment extends Fragment {
     }
 
     private void drawRoute(GeoPoint start, GeoPoint finish){
+        botonDirecciones.setVisibility(View.INVISIBLE);
         ArrayList<GeoPoint> routePoints = new ArrayList<>();
         routePoints.add(start);
         routePoints.add(finish);
@@ -344,7 +385,9 @@ public class MapFragment extends Fragment {
         if(map!=null){
             if(roadOverlay!=null){
                 map.getOverlays().remove(roadOverlay);
-                map.getOverlays().clear();
+            }
+            if (directionMarkers!=null) {
+                map.getOverlays().remove(directionMarkers);
             }
             roadOverlay = RoadManager.buildRoadOverlay(road);
             roadOverlay.getOutlinePaint().setColor(Color.RED);
@@ -352,7 +395,8 @@ public class MapFragment extends Fragment {
 
             map.getOverlays().add(roadOverlay);
 
-            Drawable nodeIcon = getResources().getDrawable(org.osmdroid.bonuspack.R.drawable.osm_ic_center_map);
+            directionMarkers = new FolderOverlay((getActivity()));
+            Drawable nodeIcon = getResources().getDrawable(org.osmdroid.bonuspack.R.drawable.marker_default_focused_base);
             for (int i=0; i<road.mNodes.size(); i++){
                 RoadNode node = road.mNodes.get(i);
                 Marker nodeMarker = new Marker(map);
@@ -362,31 +406,42 @@ public class MapFragment extends Fragment {
                 nodeMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
                 nodeMarker.setSnippet(node.mInstructions);
                 nodeMarker.setSubDescription(Road.getLengthDurationText(getActivity(), node.mLength, node.mDuration));
-                map.getOverlays().add(nodeMarker);
+                directionMarkers.add(nodeMarker);
             }
+            map.getOverlays().add(directionMarkers);
         }
     }
 
     private void buscarCercanos(String facility) {
-
+        if (poiMarkers != null) {
+            map.getOverlays().remove(poiMarkers);
+        }
+        botonDirecciones.setVisibility(View.INVISIBLE);
         NominatimPOIProvider poiProvider = new NominatimPOIProvider("OSMBonusPackTutoUserAgent");
         ArrayList<POI> pois = poiProvider.getPOICloseTo(startPoint, facility, 50, 0.1);
-        FolderOverlay poiMarkers = new FolderOverlay(getActivity());
-        Drawable poiIcon = getResources().getDrawable(R.drawable.ic_baseline_person_pin_circle_24);
+        poiMarkers = new FolderOverlay(getActivity());
+        Drawable poiIcon = getResources().getDrawable(org.osmdroid.library.R.drawable.marker_default);
         for (POI poi:pois){
             Marker poiMarker = new Marker(map);
             poiMarker.setTitle(poi.mType);
             poiMarker.setSnippet(poi.mDescription);
             poiMarker.setPosition(poi.mLocation);
             poiMarker.setIcon(poiIcon);
-            /*if (poi.mThumbnail != null){
-                poiItem.setImage(new BitmapDrawable(poi.mThumbnail));
-            }*/
+            poiMarker.setOnMarkerClickListener(new Marker.OnMarkerClickListener() {
+                @Override
+                public boolean onMarkerClick(Marker marker, MapView mapView) {
+                    mapController.animateTo(new GeoPoint(marker.getPosition().getLatitude(), marker.getPosition().getLongitude()));
+                    marker.showInfoWindow();
+                    destinationLatitude = marker.getPosition().getLatitude();
+                    destinationLongitude = marker.getPosition().getLongitude();
+                    botonDirecciones.setVisibility(View.VISIBLE);
+                    return true;
+                }
+            });
             poiMarkers.add(poiMarker);
         }
         map.getOverlays().add(poiMarkers);
-
-
+        mapController.zoomTo(15.0);
     }
 
     private void checkLocationSettings() {
@@ -414,6 +469,26 @@ public class MapFragment extends Fragment {
                 }
             }
         });
+    }
+
+    private void writeJSONObject() {
+        MyLocation myLocation = new MyLocation();
+        myLocation.setFecha(new Date(System.currentTimeMillis()));
+        myLocation.setLatitud(myLocationOverlay.getMyLocation().getLatitude());
+        myLocation.setLongitud(myLocationOverlay.getMyLocation().getLongitude());
+        localizaciones.put(myLocation.toJSON());
+        Writer output = null;
+        String filename= "locations.json";
+        try {
+            File file = new File(getContext().getExternalFilesDir(null), filename);
+            Log.i("LOCATION", "Ubicacion de archivo: "+file);
+            output = new BufferedWriter(new FileWriter(file));
+            output.write(localizaciones.toString());
+            output.close();
+        } catch (Exception e) {
+            //Log error
+            e.printStackTrace();
+        }
     }
 
 

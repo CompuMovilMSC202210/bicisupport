@@ -11,4 +11,9 @@
         android:icon="@drawable/map"
         android:title="Parqueaderos de Bici">
     </item>
+    <item
+        android:id="@+id/mostrarHistorico"
+        android:icon="@drawable/map"
+        android:title="Historico de localizacion">
+    </item>
 </menu>

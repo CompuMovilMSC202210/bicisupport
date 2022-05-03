@@ -53,4 +53,23 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="0dp" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonDirecciones"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_gravity="bottom|center"
+        android:background="@drawable/round_button"
+        android:textColor="#00239E"
+        android:textSize="12sp"
+        app:backgroundTint="@color/white"
+        app:icon="@drawable/direction"
+        app:iconSize="20dp"
+        app:iconTint="@color/project_blue"
+        android:text="Direcciones"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="invisible"
+        />
+
 </FrameLayout>
