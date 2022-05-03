@@ -116,7 +116,6 @@ public class MapFragment extends Fragment {
     Button botonCapas;
     Button botonDirecciones;
     boolean settingsOK = false;
-    GeoPoint startPoint;
 
     RoadManager roadManager;
     Polyline roadOverlay;
