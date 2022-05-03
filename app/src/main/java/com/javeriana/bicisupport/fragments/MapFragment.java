@@ -116,6 +116,7 @@ public class MapFragment extends Fragment {
     Button botonCapas;
     Button botonDirecciones;
     boolean settingsOK = false;
+    GeoPoint startPoint;
 
     RoadManager roadManager;
     Polyline roadOverlay;
@@ -196,7 +197,7 @@ public class MapFragment extends Fragment {
         map.setMultiTouchControls(true);
         mapController = map.getController();
         mapController.setZoom(20);
-        GeoPoint startPoint = new GeoPoint(4.6269924, -74.0651919);
+        startPoint = new GeoPoint(4.6269924, -74.0651919);
         mapController.setCenter(startPoint);
 
         CompassOverlay compassOverlay = new CompassOverlay(ctx, map);
