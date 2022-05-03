@@ -1,5 +1,7 @@
 package com.javeriana.bicisupport.fragments;
 
+import static android.content.Context.SENSOR_SERVICE;
+
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -7,30 +9,15 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationManager;
-import static android.content.Context.SENSOR_SERVICE;
-
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
-
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.IntentSenderRequest;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.core.text.HtmlCompat;
-import androidx.fragment.app.Fragment;
-
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -43,6 +30,18 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.PopupMenu;
 import android.widget.Toast;
+
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.IntentSenderRequest;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.core.text.HtmlCompat;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.CommonStatusCodes;
@@ -81,10 +80,10 @@ import org.osmdroid.views.overlay.FolderOverlay;
 import org.osmdroid.views.overlay.MapEventsOverlay;
 import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.Polyline;
-import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
-import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 import org.osmdroid.views.overlay.TilesOverlay;
 import org.osmdroid.views.overlay.compass.CompassOverlay;
+import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
+import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -125,6 +124,10 @@ public class MapFragment extends Fragment {
     FolderOverlay historicoMarkers;
     Marker longPressedMarker;
 
+    private SensorManager sensorManager;
+    private Sensor lightSensor;
+    private SensorEventListener lightSensorListener;
+
     private JSONArray localizaciones = new JSONArray();
     private List<MyLocation> historicoLocalizaciones;
 
@@ -135,11 +138,11 @@ public class MapFragment extends Fragment {
                 @Override
                 public void onActivityResult(Boolean result) {
                     if (!result) {
-                        Log.i("MAPS","no hay permiso de localizacion");
+                        Log.i("MAPS", "no hay permiso de localizacion");
                         Toast.makeText(getActivity().getApplicationContext(), "Permiso de localizacion denegado", Toast.LENGTH_LONG).show();
                         setDefaultLocation();
                     } else {
-                        Log.i("MAPS","Permiso de localizacion concedido");
+                        Log.i("MAPS", "Permiso de localizacion concedido");
                         startLocationUpdates();
                     }
                 }
@@ -152,19 +155,16 @@ public class MapFragment extends Fragment {
                     new ActivityResultCallback<ActivityResult>() {
                         @Override
                         public void onActivityResult(ActivityResult result) {
-                            Log.i("MAPS", "Result from settings: "+result.getResultCode());
-                            if(result.getResultCode() == getActivity().RESULT_OK){
+                            Log.i("MAPS", "Result from settings: " + result.getResultCode());
+                            if (result.getResultCode() == getActivity().RESULT_OK) {
                                 settingsOK = true;
                                 startLocationUpdates();
-                            }else{
+                            } else {
                                 Toast.makeText(getContext(), "GPS apagado", Toast.LENGTH_LONG).show();
                                 settingsOK = false;
                             }
                         }
                     });
-    private SensorManager sensorManager;
-    private Sensor lightSensor;
-    private SensorEventListener lightSensorListener;
 
     public MapFragment() {
         // Required empty public constructor
@@ -184,7 +184,7 @@ public class MapFragment extends Fragment {
         sensorManager = (SensorManager) ctx.getSystemService(SENSOR_SERVICE);
         lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
 
-        View root = inflater.inflate(R.layout.fragment_map,container,false);
+        View root = inflater.inflate(R.layout.fragment_map, container, false);
 
         botonLocalizar = root.findViewById(R.id.buttonlocalizar);
         botonCapas = root.findViewById(R.id.buttonLayers);
@@ -196,14 +196,12 @@ public class MapFragment extends Fragment {
         map.setMultiTouchControls(true);
         mapController = map.getController();
         mapController.setZoom(20);
-        GeoPoint startPoint = new GeoPoint(4.6269924,-74.0651919);
+        GeoPoint startPoint = new GeoPoint(4.6269924, -74.0651919);
         mapController.setCenter(startPoint);
 
         CompassOverlay compassOverlay = new CompassOverlay(ctx, map);
         compassOverlay.enableCompass();
         map.getOverlays().add(compassOverlay);
-
-        ((ConstraintLayout) root.findViewById(R.id.mapLayout)).addView(map);
 
         Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setTitle(HtmlCompat.fromHtml("<font color='#00239E'>Inicio</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
 
@@ -342,21 +340,20 @@ public class MapFragment extends Fragment {
 
         return root;
     }
-    
+
     private void startLocationUpdates() {
 
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             if (settingsOK) {
                 mFusedLocationProviderClient.requestLocationUpdates(mLocationRequest, mLocationCallback, null);
-            }
-            else
+            } else
                 setDefaultLocation();
         } else
             setDefaultLocation();
     }
 
     private void setDefaultLocation() {
-        startPoint = new GeoPoint(4.6269924,-74.0651919);
+        startPoint = new GeoPoint(4.6269924, -74.0651919);
     }
 
 
@@ -368,13 +365,14 @@ public class MapFragment extends Fragment {
         return locationRequest;
     }
 
-    private MapEventsOverlay createOverlayEvents(){
+    private MapEventsOverlay createOverlayEvents() {
         MapEventsOverlay overlayEventos = new MapEventsOverlay(new MapEventsReceiver() {
             @Override
             public boolean singleTapConfirmedHelper(GeoPoint p) {
                 Log.i("MAP", "marcador?");
                 return false;
             }
+
             @Override
             public boolean longPressHelper(GeoPoint p) {
                 longPressOnMap(p);
@@ -384,9 +382,9 @@ public class MapFragment extends Fragment {
         return overlayEventos;
     }
 
-    private Marker createMarker(GeoPoint p, String title, String desc, int iconID){
+    private Marker createMarker(GeoPoint p, String title, String desc, int iconID) {
         Marker marker = null;
-        if(map!=null) {
+        if (map != null) {
             marker = new Marker(map);
             if (title != null) marker.setTitle(title);
             if (desc != null) marker.setSubDescription(desc);
@@ -401,7 +399,7 @@ public class MapFragment extends Fragment {
     }
 
     private void longPressOnMap(GeoPoint p) {
-        if(longPressedMarker!=null){
+        if (longPressedMarker != null) {
             map.getOverlays().remove(longPressedMarker);
         }
         try {
@@ -427,20 +425,20 @@ public class MapFragment extends Fragment {
 
     }
 
-    private void drawRoute(GeoPoint start, GeoPoint finish){
+    private void drawRoute(GeoPoint start, GeoPoint finish) {
         botonDirecciones.setVisibility(View.INVISIBLE);
         ArrayList<GeoPoint> routePoints = new ArrayList<>();
         routePoints.add(start);
         routePoints.add(finish);
-        ((OSRMRoadManager)roadManager).setMean(OSRMRoadManager.MEAN_BY_BIKE);
+        ((OSRMRoadManager) roadManager).setMean(OSRMRoadManager.MEAN_BY_BIKE);
         Road road = roadManager.getRoad(routePoints);
-        Log.i("MAPS", "Route length: "+road.mLength+" klm");
-        Log.i("MAPS", "Duration: "+road.mDuration/60+" min");
-        if(map!=null){
-            if(roadOverlay!=null){
+        Log.i("MAPS", "Route length: " + road.mLength + " klm");
+        Log.i("MAPS", "Duration: " + road.mDuration / 60 + " min");
+        if (map != null) {
+            if (roadOverlay != null) {
                 map.getOverlays().remove(roadOverlay);
             }
-            if (directionMarkers!=null) {
+            if (directionMarkers != null) {
                 map.getOverlays().remove(directionMarkers);
             }
             roadOverlay = RoadManager.buildRoadOverlay(road);
@@ -451,12 +449,12 @@ public class MapFragment extends Fragment {
 
             directionMarkers = new FolderOverlay((getActivity()));
             Drawable nodeIcon = getResources().getDrawable(org.osmdroid.bonuspack.R.drawable.marker_default_focused_base);
-            for (int i=0; i<road.mNodes.size(); i++){
+            for (int i = 0; i < road.mNodes.size(); i++) {
                 RoadNode node = road.mNodes.get(i);
                 Marker nodeMarker = new Marker(map);
                 nodeMarker.setPosition(node.mLocation);
                 nodeMarker.setIcon(nodeIcon);
-                nodeMarker.setTitle("Step "+i);
+                nodeMarker.setTitle("Step " + i);
                 nodeMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
                 nodeMarker.setSnippet(node.mInstructions);
                 nodeMarker.setSubDescription(Road.getLengthDurationText(getActivity(), node.mLength, node.mDuration));
@@ -475,7 +473,7 @@ public class MapFragment extends Fragment {
         ArrayList<POI> pois = poiProvider.getPOICloseTo(startPoint, facility, 50, 0.1);
         poiMarkers = new FolderOverlay(getActivity());
         Drawable poiIcon = getResources().getDrawable(org.osmdroid.library.R.drawable.marker_default);
-        for (POI poi:pois){
+        for (POI poi : pois) {
             Marker poiMarker = new Marker(map);
             poiMarker.setTitle(poi.mType);
             poiMarker.setSnippet(poi.mDescription);
@@ -532,10 +530,10 @@ public class MapFragment extends Fragment {
         myLocation.setLongitud(myLocationOverlay.getMyLocation().getLongitude());
         localizaciones.put(myLocation.toJSON());
         Writer output = null;
-        String filename= "locations.json";
+        String filename = "locations.json";
         try {
             File file = new File(getContext().getExternalFilesDir(null), filename);
-            Log.i("LOCATION", "Ubicacion de archivo: "+file);
+            Log.i("LOCATION", "Ubicacion de archivo: " + file);
             output = new BufferedWriter(new FileWriter(file));
             output.write(localizaciones.toString());
             output.close();
@@ -546,12 +544,12 @@ public class MapFragment extends Fragment {
     }
 
     private void poblarHistoricos() throws FileNotFoundException, JSONException {
-        String filename= "locations.json";
+        String filename = "locations.json";
         File fileRead = new File(getContext().getExternalFilesDir(null), filename);
         InputStream is = new FileInputStream(fileRead);
         JSONArray arrayLocalizaciones = new JSONArray(Objects.requireNonNull(Utils.loadJson(is)));
         historicoLocalizaciones = new ArrayList<>();
-        for (int i = 0 ; i < arrayLocalizaciones.length(); i++) {
+        for (int i = 0; i < arrayLocalizaciones.length(); i++) {
             JSONObject object = arrayLocalizaciones.getJSONObject(i);
             historicoLocalizaciones.add(
                     new MyLocation(
@@ -561,7 +559,7 @@ public class MapFragment extends Fragment {
         }
     }
 
-    private void mostrarHistoricos () throws IOException {
+    private void mostrarHistoricos() throws IOException {
 
         if (poiMarkers != null) {
             map.getOverlays().remove(poiMarkers);
@@ -593,7 +591,7 @@ public class MapFragment extends Fragment {
         mapController.zoomTo(15.0);
     }
 
-        @Override
+    @Override
     public void onResume() {
         super.onResume();
         map.onResume();
@@ -602,8 +600,10 @@ public class MapFragment extends Fragment {
         mapController.setZoom(18.0);
         mapController.setCenter(this.startPoint);
         myLocationOverlay.enableMyLocation();
-
+        sensorManager.registerListener(lightSensorListener, lightSensor,
+                SensorManager.SENSOR_DELAY_NORMAL);
     }
+
     @Override
     public void onPause() {
         super.onPause();
@@ -611,21 +611,6 @@ public class MapFragment extends Fragment {
         map.onPause();
         //sensorManager.unregisterListener(lightListener);
         myLocationOverlay.disableMyLocation();
-    }
-
-
-    @Override
-    public void onPause() {
-        super.onPause();
         sensorManager.unregisterListener(lightSensorListener);
     }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        sensorManager.registerListener(lightSensorListener, lightSensor,
-                SensorManager.SENSOR_DELAY_NORMAL);
-    }
-
-
 }
