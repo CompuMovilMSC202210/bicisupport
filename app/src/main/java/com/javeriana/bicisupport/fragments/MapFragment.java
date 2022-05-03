@@ -4,9 +4,11 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.hardware.SensorManager;
+import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
@@ -25,6 +27,7 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.Fragment;
 
+import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -51,15 +54,24 @@ import com.google.android.gms.tasks.Task;
 import com.javeriana.bicisupport.R;
 
 import org.osmdroid.api.IMapController;
+import org.osmdroid.bonuspack.routing.OSRMRoadManager;
+import org.osmdroid.bonuspack.routing.Road;
+import org.osmdroid.bonuspack.routing.RoadManager;
+import org.osmdroid.bonuspack.routing.RoadNode;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.events.MapEventsReceiver;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.MapEventsOverlay;
+import org.osmdroid.views.overlay.Marker;
+import org.osmdroid.views.overlay.Polyline;
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class MapFragment extends Fragment {
@@ -77,6 +89,10 @@ public class MapFragment extends Fragment {
     Button botonLocalizar;
     Button botonCapas;
     boolean settingsOK = false;
+
+    RoadManager roadManager;
+    Polyline roadOverlay;
+    Marker longPressedMarker;
 
     //Obtener permiso de localizacion
     ActivityResultLauncher<String> getLocationPermission = registerForActivityResult(
@@ -108,6 +124,7 @@ public class MapFragment extends Fragment {
                                 startLocationUpdates();
                             }else{
                                 Toast.makeText(getContext(), "GPS apagado", Toast.LENGTH_LONG).show();
+                                settingsOK = false;
                             }
                         }
                     });
@@ -138,7 +155,6 @@ public class MapFragment extends Fragment {
         map.setMultiTouchControls(true);
         mapController = map.getController();
         mapController.setZoom(20);
-        //GeoPoint startPoint = new GeoPoint(4.6269924,-74.0651919);
 
         ((FrameLayout) root.findViewById(R.id.mapLayout)).addView(map);
 
@@ -200,6 +216,11 @@ public class MapFragment extends Fragment {
             }
         });
 
+        //roadManager
+        roadManager = new OSRMRoadManager(getActivity(), "ANDROID");
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
         return root;
     }
 
@@ -236,11 +257,83 @@ public class MapFragment extends Fragment {
             }
             @Override
             public boolean longPressHelper(GeoPoint p) {
-                //longPressOnMap(p);
+                longPressOnMap(p);
                 return true;
             }
         });
         return overlayEventos;
+    }
+
+    private Marker createMarker(GeoPoint p, String title, String desc, int iconID){
+        Marker marker = null;
+        if(map!=null) {
+            marker = new Marker(map);
+            if (title != null) marker.setTitle(title);
+            if (desc != null) marker.setSubDescription(desc);
+            if (iconID != 0) {
+                Drawable myIcon = getResources().getDrawable(iconID, getActivity().getTheme());
+                marker.setIcon(myIcon);
+            }
+            marker.setPosition(p);
+            marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        }
+        return marker;
+    }
+
+    private void longPressOnMap(GeoPoint p) {
+        if(longPressedMarker!=null){
+            map.getOverlays().remove(longPressedMarker);
+        }
+
+        try {
+
+            List<Address> addresses = mGeocoder.getFromLocation(p.getLatitude(), p.getLongitude(), 2);
+            Address addressResult = addresses.get(0);
+            longPressedMarker = createMarker(p, addressResult.getAddressLine(0), null, R.drawable.ic_baseline_person_pin_circle_24);
+            map.getOverlays().add(longPressedMarker);
+            if(settingsOK) {
+                GeoPoint start = new GeoPoint(myLocationOverlay.getMyLocation());
+                GeoPoint finish = new GeoPoint(p.getLatitude(), p.getLongitude());
+                drawRoute(start, finish);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void drawRoute(GeoPoint start, GeoPoint finish){
+        ArrayList<GeoPoint> routePoints = new ArrayList<>();
+        routePoints.add(start);
+        routePoints.add(finish);
+        ((OSRMRoadManager)roadManager).setMean(OSRMRoadManager.MEAN_BY_BIKE);
+        Road road = roadManager.getRoad(routePoints);
+        Log.i("MAPS", "Route length: "+road.mLength+" klm");
+        Log.i("MAPS", "Duration: "+road.mDuration/60+" min");
+        if(map!=null){
+            if(roadOverlay!=null){
+                map.getOverlays().remove(roadOverlay);
+                map.getOverlays().clear();
+            }
+            roadOverlay = RoadManager.buildRoadOverlay(road);
+            roadOverlay.getOutlinePaint().setColor(Color.RED);
+            roadOverlay.getOutlinePaint().setStrokeWidth(10);
+
+            map.getOverlays().add(roadOverlay);
+
+            Drawable nodeIcon = getResources().getDrawable(org.osmdroid.bonuspack.R.drawable.osm_ic_center_map);
+            for (int i=0; i<road.mNodes.size(); i++){
+                RoadNode node = road.mNodes.get(i);
+                Marker nodeMarker = new Marker(map);
+                nodeMarker.setPosition(node.mLocation);
+                nodeMarker.setIcon(nodeIcon);
+                nodeMarker.setTitle("Step "+i);
+                nodeMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+                nodeMarker.setSnippet(node.mInstructions);
+                nodeMarker.setSubDescription(Road.getLengthDurationText(getActivity(), node.mLength, node.mDuration));
+                map.getOverlays().add(nodeMarker);
+            }
+        }
     }
 
     private void checkLocationSettings() {
