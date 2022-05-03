@@ -31,10 +31,12 @@ import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.ApiException;
@@ -54,6 +56,8 @@ import com.google.android.gms.tasks.Task;
 import com.javeriana.bicisupport.R;
 
 import org.osmdroid.api.IMapController;
+import org.osmdroid.bonuspack.location.NominatimPOIProvider;
+import org.osmdroid.bonuspack.location.POI;
 import org.osmdroid.bonuspack.routing.OSRMRoadManager;
 import org.osmdroid.bonuspack.routing.Road;
 import org.osmdroid.bonuspack.routing.RoadManager;
@@ -63,6 +67,7 @@ import org.osmdroid.events.MapEventsReceiver;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.FolderOverlay;
 import org.osmdroid.views.overlay.MapEventsOverlay;
 import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.Polyline;
@@ -216,6 +221,32 @@ public class MapFragment extends Fragment {
             }
         });
 
+        botonCapas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popupMenu = new PopupMenu(getActivity(), view);
+                popupMenu.getMenuInflater().inflate(R.menu.mapmenu_popup, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        switch (menuItem.getItemId()) {
+                            case R.id.mostrarCais:
+                                buscarCercanos("police");
+                                Log.i("MAPS", "CAIS selecionado");
+                                return true;
+                            case R.id.mostrarParqueaderos:
+                                buscarCercanos("bicycle_parking");
+                                Log.i("MAPS", "parqueaderos selecionado");
+                                return true;
+                            default:
+                                return false;
+                        }
+                    }
+                });
+                popupMenu.show();
+            }
+        });
+
         //roadManager
         roadManager = new OSRMRoadManager(getActivity(), "ANDROID");
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -334,6 +365,28 @@ public class MapFragment extends Fragment {
                 map.getOverlays().add(nodeMarker);
             }
         }
+    }
+
+    private void buscarCercanos(String facility) {
+
+        NominatimPOIProvider poiProvider = new NominatimPOIProvider("OSMBonusPackTutoUserAgent");
+        ArrayList<POI> pois = poiProvider.getPOICloseTo(startPoint, facility, 50, 0.1);
+        FolderOverlay poiMarkers = new FolderOverlay(getActivity());
+        Drawable poiIcon = getResources().getDrawable(R.drawable.ic_baseline_person_pin_circle_24);
+        for (POI poi:pois){
+            Marker poiMarker = new Marker(map);
+            poiMarker.setTitle(poi.mType);
+            poiMarker.setSnippet(poi.mDescription);
+            poiMarker.setPosition(poi.mLocation);
+            poiMarker.setIcon(poiIcon);
+            /*if (poi.mThumbnail != null){
+                poiItem.setImage(new BitmapDrawable(poi.mThumbnail));
+            }*/
+            poiMarkers.add(poiMarker);
+        }
+        map.getOverlays().add(poiMarkers);
+
+
     }
 
     private void checkLocationSettings() {
