@@ -11,6 +11,12 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import static android.content.Context.SENSOR_SERVICE;
+
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 
 import androidx.activity.result.ActivityResult;
@@ -77,6 +83,8 @@ import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.Polyline;
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
+import org.osmdroid.views.overlay.TilesOverlay;
+import org.osmdroid.views.overlay.compass.CompassOverlay;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -154,6 +162,9 @@ public class MapFragment extends Fragment {
                             }
                         }
                     });
+    private SensorManager sensorManager;
+    private Sensor lightSensor;
+    private SensorEventListener lightSensorListener;
 
     public MapFragment() {
         // Required empty public constructor
@@ -170,6 +181,9 @@ public class MapFragment extends Fragment {
         Context ctx = getActivity();
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
 
+        sensorManager = (SensorManager) ctx.getSystemService(SENSOR_SERVICE);
+        lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+
         View root = inflater.inflate(R.layout.fragment_map,container,false);
 
         botonLocalizar = root.findViewById(R.id.buttonlocalizar);
@@ -182,6 +196,34 @@ public class MapFragment extends Fragment {
         map.setMultiTouchControls(true);
         mapController = map.getController();
         mapController.setZoom(20);
+        GeoPoint startPoint = new GeoPoint(4.6269924,-74.0651919);
+        mapController.setCenter(startPoint);
+
+        CompassOverlay compassOverlay = new CompassOverlay(ctx, map);
+        compassOverlay.enableCompass();
+        map.getOverlays().add(compassOverlay);
+
+        ((ConstraintLayout) root.findViewById(R.id.mapLayout)).addView(map);
+
+        Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setTitle(HtmlCompat.fromHtml("<font color='#00239E'>Inicio</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+
+        lightSensorListener = new SensorEventListener() {
+            @Override
+            public void onSensorChanged(SensorEvent sensorEvent) {
+                if (map != null) {
+                    if (sensorEvent.values[0] < 5000) {
+                        map.getOverlayManager().getTilesOverlay().setColorFilter(TilesOverlay.INVERT_COLORS);
+
+                    } else
+                        map.getOverlayManager().getTilesOverlay().setColorFilter(null);
+                }
+            }
+
+            @Override
+            public void onAccuracyChanged(Sensor sensor, int i) {
+
+            }
+        };
 
         ((FrameLayout) root.findViewById(R.id.mapLayout)).addView(map);
 
@@ -300,7 +342,7 @@ public class MapFragment extends Fragment {
 
         return root;
     }
-
+    
     private void startLocationUpdates() {
 
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -570,5 +612,20 @@ public class MapFragment extends Fragment {
         //sensorManager.unregisterListener(lightListener);
         myLocationOverlay.disableMyLocation();
     }
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        sensorManager.unregisterListener(lightSensorListener);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        sensorManager.registerListener(lightSensorListener, lightSensor,
+                SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
 
 }
