@@ -7,7 +7,6 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.hardware.SensorManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -21,7 +20,6 @@ import androidx.activity.result.IntentSenderRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.text.HtmlCompat;
@@ -56,8 +54,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.javeriana.bicisupport.R;
 import com.javeriana.bicisupport.models.MyLocation;
+import com.javeriana.bicisupport.utils.Utils;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.bonuspack.location.NominatimPOIProvider;
 import org.osmdroid.bonuspack.location.POI;
@@ -79,8 +80,11 @@ import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Date;
@@ -110,9 +114,11 @@ public class MapFragment extends Fragment {
     Polyline roadOverlay;
     FolderOverlay poiMarkers;
     FolderOverlay directionMarkers;
+    FolderOverlay historicoMarkers;
     Marker longPressedMarker;
 
     private JSONArray localizaciones = new JSONArray();
+    private List<MyLocation> historicoLocalizaciones;
 
     //Obtener permiso de localizacion
     ActivityResultLauncher<String> getLocationPermission = registerForActivityResult(
@@ -255,6 +261,12 @@ public class MapFragment extends Fragment {
                                 Log.i("MAPS", "parqueaderos selecionado");
                                 return true;
                             case R.id.mostrarHistorico:
+                                try {
+                                    poblarHistoricos();
+                                    mostrarHistoricos();
+                                } catch (JSONException | IOException e) {
+                                    e.printStackTrace();
+                                }
                                 Log.i("MAPS", "Historico seleccionado");
                             default:
                                 return false;
@@ -491,6 +503,53 @@ public class MapFragment extends Fragment {
         }
     }
 
+    private void poblarHistoricos() throws FileNotFoundException, JSONException {
+        String filename= "locations.json";
+        File fileRead = new File(getContext().getExternalFilesDir(null), filename);
+        InputStream is = new FileInputStream(fileRead);
+        JSONArray arrayLocalizaciones = new JSONArray(Objects.requireNonNull(Utils.loadJson(is)));
+        historicoLocalizaciones = new ArrayList<>();
+        for (int i = 0 ; i < arrayLocalizaciones.length(); i++) {
+            JSONObject object = arrayLocalizaciones.getJSONObject(i);
+            historicoLocalizaciones.add(
+                    new MyLocation(
+                            object.getDouble("latitud"),
+                            object.getDouble("longitud")
+                    ));
+        }
+    }
+
+    private void mostrarHistoricos () throws IOException {
+
+        if (poiMarkers != null) {
+            map.getOverlays().remove(poiMarkers);
+        }
+        if (historicoMarkers != null) {
+            map.getOverlays().remove(historicoMarkers);
+        }
+
+        historicoMarkers = new FolderOverlay(getActivity());
+        Drawable poiIcon = getResources().getDrawable(org.osmdroid.library.R.drawable.marker_default);
+        for (MyLocation l : historicoLocalizaciones) {
+            Address address = mGeocoder.getFromLocation(l.getLatitud(), l.getLongitud(), 1).get(0);
+            GeoPoint p = new GeoPoint(address.getLatitude(), address.getLongitude());
+            Marker historicoMarker = createMarker(p, address.getAddressLine(0), null, org.osmdroid.library.R.drawable.marker_default);
+            historicoMarker.setOnMarkerClickListener(new Marker.OnMarkerClickListener() {
+                @Override
+                public boolean onMarkerClick(Marker marker, MapView mapView) {
+                    mapController.animateTo(new GeoPoint(marker.getPosition().getLatitude(), marker.getPosition().getLongitude()));
+                    marker.showInfoWindow();
+                    destinationLatitude = marker.getPosition().getLatitude();
+                    destinationLongitude = marker.getPosition().getLongitude();
+                    botonDirecciones.setVisibility(View.VISIBLE);
+                    return true;
+                }
+            });
+            historicoMarkers.add(historicoMarker);
+        }
+        map.getOverlays().add(historicoMarkers);
+        mapController.zoomTo(15.0);
+    }
 
         @Override
     public void onResume() {

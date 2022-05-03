@@ -12,6 +12,20 @@ public class MyLocation {
     double latitud;
     double longitud;
 
+    public MyLocation(Date fecha, double latitud, double longitud) {
+        this.fecha = fecha;
+        this.latitud = latitud;
+        this.longitud = longitud;
+    }
+
+    public MyLocation(double latitud, double longitud) {
+        this.latitud = latitud;
+        this.longitud = longitud;
+    }
+
+    public MyLocation() {
+    }
+
     public Date getFecha() {
         return fecha;
     }
