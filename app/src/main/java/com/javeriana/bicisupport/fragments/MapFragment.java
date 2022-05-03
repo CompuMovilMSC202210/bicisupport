@@ -18,6 +18,7 @@ import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.javeriana.bicisupport.R;
 
 import org.osmdroid.api.IMapController;
@@ -26,6 +27,7 @@ import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.TilesOverlay;
+import org.osmdroid.views.overlay.compass.CompassOverlay;
 
 import java.util.Objects;
 
@@ -56,6 +58,10 @@ public class MapFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_map,container,false);
 
+
+
+
+
         map = new MapView(ctx);
         map.setTileSource(TileSourceFactory.MAPNIK);
         map.setBuiltInZoomControls(true);
@@ -64,6 +70,11 @@ public class MapFragment extends Fragment {
         mapController.setZoom(20);
         GeoPoint startPoint = new GeoPoint(4.6269924,-74.0651919);
         mapController.setCenter(startPoint);
+
+        CompassOverlay compassOverlay = new CompassOverlay(ctx, map);
+        compassOverlay.enableCompass();
+        map.getOverlays().add(compassOverlay);
+
         ((ConstraintLayout) root.findViewById(R.id.mapLayout)).addView(map);
 
         Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setTitle(HtmlCompat.fromHtml("<font color='#00239E'>Inicio</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
@@ -74,6 +85,7 @@ public class MapFragment extends Fragment {
                 if (map != null) {
                     if (sensorEvent.values[0] < 5000) {
                         map.getOverlayManager().getTilesOverlay().setColorFilter(TilesOverlay.INVERT_COLORS);
+
                     } else
                         map.getOverlayManager().getTilesOverlay().setColorFilter(null);
                 }
@@ -93,11 +105,13 @@ public class MapFragment extends Fragment {
         super.onPause();
         sensorManager.unregisterListener(lightSensorListener);
     }
+
     @Override
     public void onResume() {
         super.onResume();
         sensorManager.registerListener(lightSensorListener, lightSensor,
                 SensorManager.SENSOR_DELAY_NORMAL);
     }
+
 
 }
