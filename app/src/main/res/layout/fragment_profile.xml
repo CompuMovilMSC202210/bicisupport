@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="20dp"
+        android:padding="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,67 +58,68 @@
                     android:text="@string/example_details"
                     android:textColor="@color/white"
                     android:textSize="18sp" />
+
             </LinearLayout>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/edit_profile"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginStart="60dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="60dp"
-                android:background="@drawable/save_button"
-                android:text="@string/edit_profile"
-                android:textColor="@color/project_blue"
-                app:backgroundTint="@color/white"
-                app:icon="@drawable/pencil"
-                app:iconSize="30dp"
-                app:iconTint="@color/project_blue" />
+                android:layout_height="match_parent"
+                android:layout_marginTop="150dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/bici_details"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginStart="60dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="60dp"
-                android:background="@drawable/bici_details"
-                android:text="@string/bici_details"
-                android:textColor="@color/project_blue"
-                app:backgroundTint="@color/white"
-                app:icon="@drawable/bicycle"
-                app:iconSize="30dp"
-                app:iconTint="@color/project_blue" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/edit_profile"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    app:backgroundTint="@color/white"
+                    app:icon="@drawable/editar_perfil"
+                    app:iconGravity="textStart"
+                    app:iconSize="50dp"
+                    app:iconTint="@color/project_blue" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/novedades"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginStart="60dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="60dp"
-                android:background="@drawable/novedades_button"
-                android:text="@string/ver_novedades"
-                android:textColor="@color/project_blue"
-                app:backgroundTint="@color/white"
-                app:icon="@drawable/inbox"
-                app:iconSize="30dp"
-                app:iconTint="@color/project_blue" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/bici_details"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    app:backgroundTint="@color/white"
+                    app:icon="@drawable/bike_btn_profile"
+                    app:iconGravity="textStart"
+                    app:iconSize="50dp"
+                    app:iconTint="@color/project_blue" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/logout"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginStart="60dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="60dp"
-                android:background="@drawable/logout_button"
-                android:text="@string/logout"
-                android:textColor="@color/project_blue"
-                app:backgroundTint="@color/white"
-                app:icon="@drawable/logout"
-                app:iconSize="30dp"
-                app:iconTint="@color/project_blue" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/novedades"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    app:backgroundTint="@color/white"
+                    app:icon="@drawable/btn_novedades"
+                    app:iconGravity="textStart"
+                    app:iconSize="50dp"
+                    app:iconTint="@color/project_blue" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/logout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    app:backgroundTint="@color/white"
+                    app:icon="@drawable/cerrar_sesion"
+                    app:iconGravity="textStart"
+                    app:iconSize="50dp"
+                    app:iconTint="@color/project_blue" />
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 

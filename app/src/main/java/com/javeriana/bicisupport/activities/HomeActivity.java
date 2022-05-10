@@ -1,5 +1,6 @@
 package com.javeriana.bicisupport.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -29,10 +30,11 @@ import java.util.Objects;
 
 public class HomeActivity extends AppCompatActivity {
 
-    ImageButton assistant, help, profile, allies;
+    ImageButton assistant, help, profile, allies,home;
     private MapView map;
     private IMapController mapController;
 
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +46,7 @@ public class HomeActivity extends AppCompatActivity {
         help = findViewById(R.id.helpButton);
         profile = findViewById(R.id.personButton);
         allies = findViewById(R.id.alliesButton);
+        home = findViewById(R.id.homeButton);
 
         allies.setOnClickListener(view -> {
             ListaAliadosFragment aliadosFragment = new ListaAliadosFragment();
@@ -69,6 +72,12 @@ public class HomeActivity extends AppCompatActivity {
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
             fragmentTransaction.replace(R.id.fragmentContainerView, profileFragment).commit();
+        });
+        home.setOnClickListener(view -> {
+            MapFragment mapFragment = new MapFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+
+            fragmentTransaction.replace(R.id.fragmentContainerView, mapFragment).commit();
         });
     }
 

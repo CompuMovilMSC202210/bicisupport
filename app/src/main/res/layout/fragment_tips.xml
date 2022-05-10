@@ -62,16 +62,18 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_below="@id/text_tip_1"
-            android:layout_margin="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
             android:layout_toLeftOf="@id/image_tip_1"
             android:background="@drawable/button_border"
             app:backgroundTint="@color/white"
             app:icon="@drawable/magnifier_icon"
             app:iconGravity="textStart"
-            app:iconSize="20dp"
             app:iconPadding="0dp"
-            app:iconTint="@color/project_blue"
-            />
+            app:iconSize="20dp"
+            app:iconTint="@color/project_blue" />
     </RelativeLayout>
 
     <RelativeLayout

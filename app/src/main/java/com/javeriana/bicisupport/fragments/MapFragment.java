@@ -28,6 +28,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
@@ -37,6 +38,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.IntentSenderRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.res.ResourcesCompat;
@@ -203,7 +205,16 @@ public class MapFragment extends Fragment {
         compassOverlay.enableCompass();
         map.getOverlays().add(compassOverlay);
 
-        Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setTitle(HtmlCompat.fromHtml("<font color='#00239E'>Inicio</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        actionBar.setDisplayOptions(actionBar.getDisplayOptions() | ActionBar.DISPLAY_SHOW_CUSTOM);
+        actionBar.setTitle(HtmlCompat.fromHtml("<font color='#00239E'>Inicio</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+        ImageView imageView = new ImageView(actionBar.getThemedContext());
+        imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        imageView.setImageResource(R.drawable.bici_home);
+        imageView.setColorFilter(Color.parseColor("#00239E"));
+        ActionBar.LayoutParams layoutParams = new ActionBar.LayoutParams(100,100, Gravity.START | Gravity.CENTER_VERTICAL);
+        imageView.setLayoutParams(layoutParams);
+        actionBar.setCustomView(imageView);
 
         lightSensorListener = new SensorEventListener() {
             @Override

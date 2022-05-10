@@ -58,18 +58,17 @@
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ver mas..."
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_gravity="right"
+        android:layout_margin="5dp"
         android:background="@drawable/round_button"
-        android:textColor="#00239E"
-        android:textSize="12sp"
-        android:textAllCaps="false"
-        app:icon="@drawable/detalle"
-        app:iconSize="20dp"
-        app:iconTint="@color/project_blue"
+        android:text="Ver mas..."
         app:backgroundTint="@color/white"
-        />
+        app:icon="@drawable/ver_detalle"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:iconSize="30dp"
+        app:iconTint="@color/project_blue" />
 
 </LinearLayout>

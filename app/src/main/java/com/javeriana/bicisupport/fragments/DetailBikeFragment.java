@@ -7,12 +7,14 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -24,6 +26,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Base64;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -178,7 +181,16 @@ public class DetailBikeFragment extends Fragment implements AdapterView.OnItemSe
         colorSpinner.setOnItemSelectedListener(this);
         typeSpinner.setOnItemSelectedListener(this);
 
-        Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).setTitle(HtmlCompat.fromHtml("<font color='#00239E'>Detalle de bici</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        actionBar.setDisplayOptions(actionBar.getDisplayOptions() | ActionBar.DISPLAY_SHOW_CUSTOM);
+        actionBar.setTitle(HtmlCompat.fromHtml("<font color='#00239E'>Editar Bici</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+        ImageView imageView = new ImageView(actionBar.getThemedContext());
+        imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        imageView.setImageResource(R.drawable.bike_btn_profile);
+        imageView.setColorFilter(Color.parseColor("#00239E"));
+        ActionBar.LayoutParams layoutParams = new ActionBar.LayoutParams(100,100, Gravity.START | Gravity.CENTER_VERTICAL);
+        imageView.setLayoutParams(layoutParams);
+        actionBar.setCustomView(imageView);
 
         if (!imageUrl.equals("")) {
             byte[] imageBytes;
