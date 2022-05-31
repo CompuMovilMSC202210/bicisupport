@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -25,12 +26,13 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.gson.Gson;
 import com.javeriana.bicisupport.R;
-import com.javeriana.bicisupport.fragments.ChatFragment;
 import com.javeriana.bicisupport.fragments.ListaAliadosFragment;
 import com.javeriana.bicisupport.fragments.MapFragment;
 import com.javeriana.bicisupport.fragments.ProfileFragment;
 import com.javeriana.bicisupport.fragments.TipsFragment;
+import com.javeriana.bicisupport.fragments.UsersListFragment;
 import com.javeriana.bicisupport.models.requests.UserRequest;
+import com.javeriana.bicisupport.utils.Utils;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.views.MapView;
@@ -46,6 +48,7 @@ public class HomeActivity extends AppCompatActivity {
     private IMapController mapController;
 
     SharedPreferences prefs;
+    SharedPreferences.Editor editor;
     RequestQueue requestQueue;
 
     @SuppressLint("WrongViewCast")
@@ -56,6 +59,7 @@ public class HomeActivity extends AppCompatActivity {
 
         prefs = getSharedPreferences(this.getString(R.string.app_name), Context.MODE_PRIVATE);
         String localId = prefs.getString("localId", "");
+        editor = prefs.edit();
 
         Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(Color.WHITE));
 
@@ -66,6 +70,8 @@ public class HomeActivity extends AppCompatActivity {
                 updateUser(localId, updatedToken);
             }
         });
+
+        getUserData();
 
         assistant = findViewById(R.id.assistantButton);
         help = findViewById(R.id.helpButton);
@@ -87,7 +93,7 @@ public class HomeActivity extends AppCompatActivity {
             fragmentTransaction.commit();
         });
         assistant.setOnClickListener(view -> {
-            ChatFragment chatFragment = new ChatFragment();
+            UsersListFragment chatFragment = new UsersListFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
             fragmentTransaction.replace(R.id.fragmentContainerView, chatFragment).commit();
@@ -153,6 +159,32 @@ public class HomeActivity extends AppCompatActivity {
                 return params;
             }
         };
+
+        requestQueue.add(request);
+    }
+
+    private void getUserData() {
+        requestQueue = Volley.newRequestQueue(getApplicationContext());
+        String localId = prefs.getString("localId", "");
+        String url =
+                String.format("https://bici-support-api.herokuapp.com/api/v1/users/%s", localId);
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                response -> {
+                    String name = Utils.getStringValueFromJsonObjectByName(response, "name");
+
+                    editor.putString("userName", name);
+                    editor.commit();
+                },
+                error -> {
+                    AlertDialog alert = new AlertDialog.Builder(getApplicationContext())
+                            .setMessage("No es posible recuperar el usuario")
+                            .setCancelable(false)
+                            .setPositiveButton("Ok", (dialog, which) -> dialog.cancel())
+                            .create();
+                    alert.setTitle("Error recuperando el usuario");
+                    alert.show();
+                });
 
         requestQueue.add(request);
     }
