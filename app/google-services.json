@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "860691944285",
+    "firebase_url": "https://bici-support-2210-default-rtdb.firebaseio.com",
+    "project_id": "bici-support-2210",
+    "storage_bucket": "bici-support-2210.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:860691944285:android:d05d3f9038c4e87b5b4eb4",
+        "android_client_info": {
+          "package_name": "com.javeriana.bicisupport"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "860691944285-h35jq64nk14ha979chh6kld64oggkng2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAcGUZfkPOjwtfEHY_8zfAHN1eM__dRWY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "860691944285-h35jq64nk14ha979chh6kld64oggkng2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
