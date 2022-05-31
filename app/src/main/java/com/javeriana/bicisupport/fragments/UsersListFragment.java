@@ -1,5 +1,7 @@
 package com.javeriana.bicisupport.fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,6 +30,7 @@ import com.javeriana.bicisupport.models.UserList;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class UsersListFragment extends Fragment {
 
@@ -35,6 +38,10 @@ public class UsersListFragment extends Fragment {
     RequestQueue requestQueue;
 
     List<UserList> usersList;
+    List<UserList> finalList;
+    String localId;
+
+    SharedPreferences prefs;
 
     public UsersListFragment() {
         // Required empty public constructor
@@ -62,7 +69,10 @@ public class UsersListFragment extends Fragment {
         actionBar.setTitle(HtmlCompat.fromHtml("<font color='#00239E'>Lista de usuarios</font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
 
         usersList = new ArrayList<>();
+        finalList = new ArrayList<>();
         usersListView = root.findViewById(R.id.users_list_view);
+
+        prefs = getActivity().getSharedPreferences(this.getString(R.string.app_name), Context.MODE_PRIVATE);
 
         getAllUsers(root);
 
@@ -71,9 +81,9 @@ public class UsersListFragment extends Fragment {
             FragmentTransaction fragmentTransaction = ((HomeActivity) getContext()).getSupportFragmentManager().beginTransaction();
 
             Bundle bundle = new Bundle();
-            bundle.putString("cloudToken", usersList.get(position).getCloudToken());
-            bundle.putString("destinyName", usersList.get(position).getName());
-            bundle.putString("userLocalId", usersList.get(position).getLocalId());
+            bundle.putString("cloudToken", finalList.get(position).getCloudToken());
+            bundle.putString("destinyName", finalList.get(position).getName());
+            bundle.putString("userLocalId", finalList.get(position).getLocalId());
             chatFragment.setArguments(bundle);
 
             fragmentTransaction.replace(R.id.fragmentContainerView, chatFragment);
@@ -84,6 +94,7 @@ public class UsersListFragment extends Fragment {
     }
 
     private void getAllUsers(View view) {
+        localId = prefs.getString("localId", "");
         String baseGetAllUrl = "https://bici-support-api.herokuapp.com/api/v1/users";
         requestQueue = Volley.newRequestQueue(view.getContext());
 
@@ -93,7 +104,8 @@ public class UsersListFragment extends Fragment {
         StringRequest request = new StringRequest(Request.Method.GET, baseGetAllUrl,
                 response -> {
                     usersList = new Gson().fromJson(response, listType);
-                    ArrayAdapter<UserList> adapter = new ArrayAdapter<>(view.getContext(), R.layout.custom_list_names, usersList);
+                    finalList = usersList.stream().filter(u -> !u.getLocalId().equals(localId)).collect(Collectors.toList());
+                    ArrayAdapter<UserList> adapter = new ArrayAdapter<>(view.getContext(), R.layout.custom_list_names, finalList);
                     usersListView.setAdapter(adapter);
                 },
                 error -> {
