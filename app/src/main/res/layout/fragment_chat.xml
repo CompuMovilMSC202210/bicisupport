@@ -20,8 +20,10 @@
             android:layout_marginBottom="60dp"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
         <LinearLayout
             android:id="@+id/linearLayout2"
@@ -35,6 +37,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
+
             <EditText
                 android:id="@+id/cmensajec"
                 android:layout_width="wrap_content"
@@ -46,6 +49,16 @@
                 android:textColor="#ffffff" />
 
             <Button
+                android:id="@+id/botonCompartirUbicacion"
+                android:layout_width="15dp"
+                android:layout_height="48dp"
+                android:layout_weight="0.3"
+                android:text=""
+                android:background="@drawable/orden_ubicacion"
+                android:backgroundTint="@color/white"
+                />
+
+            <Button
                 android:id="@+id/send"
                 android:layout_width="10dp"
                 android:layout_height="48dp"
@@ -54,6 +67,25 @@
                 app:backgroundTint="@color/white" />
 
         </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/botonnseguirUbicacion"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom|center"
+            android:background="@drawable/round_button"
+            android:text="Seguir ubicacion"
+            android:textColor="#00239E"
+            android:textSize="12sp"
+            app:backgroundTint="@color/white"
+            app:icon="@drawable/map"
+            app:iconSize="20dp"
+            app:iconTint="@color/project_blue"
+            app:layout_constraintBottom_toBottomOf="@+id/lmensajesc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:visibility="invisible"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

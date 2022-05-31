@@ -59,7 +59,13 @@ import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.javeriana.bicisupport.R;
+import com.javeriana.bicisupport.models.LocationSharing;
 import com.javeriana.bicisupport.models.MyLocation;
 import com.javeriana.bicisupport.utils.Utils;
 
@@ -125,6 +131,7 @@ public class MapFragment extends Fragment {
     FolderOverlay directionMarkers;
     FolderOverlay historicoMarkers;
     Marker longPressedMarker;
+    Marker sharedLocationmarker;
 
     private SensorManager sensorManager;
     private Sensor lightSensor;
@@ -132,6 +139,10 @@ public class MapFragment extends Fragment {
 
     private JSONArray localizaciones = new JSONArray();
     private List<MyLocation> historicoLocalizaciones;
+
+    FirebaseDatabase database;
+    DatabaseReference myRef;
+    boolean active;
 
     //Obtener permiso de localizacion
     ActivityResultLauncher<String> getLocationPermission = registerForActivityResult(
@@ -183,6 +194,8 @@ public class MapFragment extends Fragment {
         Context ctx = getActivity();
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
 
+
+
         sensorManager = (SensorManager) ctx.getSystemService(SENSOR_SERVICE);
         lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
 
@@ -215,6 +228,9 @@ public class MapFragment extends Fragment {
         ActionBar.LayoutParams layoutParams = new ActionBar.LayoutParams(100,100, Gravity.START | Gravity.CENTER_VERTICAL);
         imageView.setLayoutParams(layoutParams);
         actionBar.setCustomView(imageView);
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        myRef = database.getReference("locationsharing");
 
         lightSensorListener = new SensorEventListener() {
             @Override
@@ -348,6 +364,26 @@ public class MapFragment extends Fragment {
         roadManager = new OSRMRoadManager(getActivity(), "ANDROID");
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (longPressedMarker != null) {
+                    map.getOverlays().remove(sharedLocationmarker);
+                }
+                if (active) {
+                    LocationSharing locationSharing = dataSnapshot.getValue(LocationSharing.class);
+                    GeoPoint sharedPoint = new GeoPoint(locationSharing.getLatitud(), locationSharing.getLongitud());
+                    sharedLocationmarker = createMarker(sharedPoint, "Ubicacion aliado", null, R.drawable.ic_baseline_person_pin_circle_24);
+                    map.getOverlays().add(sharedLocationmarker);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         return root;
     }
@@ -613,6 +649,7 @@ public class MapFragment extends Fragment {
         myLocationOverlay.enableMyLocation();
         sensorManager.registerListener(lightSensorListener, lightSensor,
                 SensorManager.SENSOR_DELAY_NORMAL);
+        active = true;
     }
 
     @Override
@@ -623,5 +660,6 @@ public class MapFragment extends Fragment {
         //sensorManager.unregisterListener(lightListener);
         myLocationOverlay.disableMyLocation();
         sensorManager.unregisterListener(lightSensorListener);
+        active = false;
     }
 }
