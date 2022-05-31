@@ -2,7 +2,9 @@ package com.javeriana.bicisupport.services;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 
 import androidx.annotation.NonNull;
@@ -11,6 +13,7 @@ import androidx.core.app.NotificationCompat;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.javeriana.bicisupport.R;
+import com.javeriana.bicisupport.activities.HomeActivity;
 
 import java.util.Random;
 
@@ -39,11 +42,23 @@ public class FirebaseMessageService extends FirebaseMessagingService {
             nm.createNotificationChannel(nc);
         }
 
+        Intent nf = new Intent(getApplicationContext(), HomeActivity.class);
+        nf.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
+        PendingIntent pendingIntent = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S)
+            pendingIntent = PendingIntent.getActivity
+                    (this, 0, nf, PendingIntent.FLAG_MUTABLE);
+        else
+            pendingIntent = PendingIntent.getActivity
+                    (this, 0, nf, PendingIntent.FLAG_ONE_SHOT);
+
         builder.setAutoCancel(true)
                 .setSmallIcon(R.drawable.logoazul)
                 .setContentText(detail)
                 .setContentTitle(title)
-                .setContentInfo("nuevo");
+                .setContentInfo("nuevo")
+                .setContentIntent(pendingIntent);
 
         Random random = new Random();
         int idNotify = random.nextInt(8000);
