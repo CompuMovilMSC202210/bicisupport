@@ -101,7 +101,6 @@ public class ChatFragment extends Fragment {
     Button btnsend;
     RecyclerView listamensaje;
     Button btnCompartirUbicacion;
-    Button btnSeguirUbicacion;
 
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private LocationRequest mLocationRequest;
@@ -191,7 +190,6 @@ public class ChatFragment extends Fragment {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         locationSharingRef = FirebaseDatabase.getInstance().getReference(PATH_LOCATIONSHARING);
         btnCompartirUbicacion = root.findViewById(R.id.botonCompartirUbicacion);
-        btnSeguirUbicacion = root.findViewById(R.id.botonnseguirUbicacion);
 
         Bundle args = this.getArguments();
         prefs = getActivity().getSharedPreferences(this.getString(R.string.app_name), Context.MODE_PRIVATE);
@@ -249,7 +247,6 @@ public class ChatFragment extends Fragment {
                 String name = prefs.getString("userName", "");
                 getLocationPermission.launch(Manifest.permission.ACCESS_FINE_LOCATION);
                 checkLocationSettings();
-                btnSeguirUbicacion.setVisibility(View.VISIBLE);
                 if (settingsOK) {
                 mensaje.setText("Estoy compartiendo mi ubicacion: ir a mapa");
                 mensajes.add(new Mensaje(mensaje.getText().toString(), name));
@@ -338,27 +335,6 @@ public class ChatFragment extends Fragment {
 
     public void listenChanges(View view) {
         String name = prefs.getString("userName", "");
-        locationSharingRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()) {
-                    Boolean sharingLocationActive = singleSnapshot.getValue(Boolean.class);
-                    Log.i("CHAT", "activo: " + sharingLocationActive);
-                    if (sharingLocationActive) {
-                        btnSeguirUbicacion.setVisibility(View.VISIBLE);
-                        break;
-                    } else {
-                        btnSeguirUbicacion.setVisibility(View.INVISIBLE);
-                        break;
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
         mDatabase.child("/chat").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

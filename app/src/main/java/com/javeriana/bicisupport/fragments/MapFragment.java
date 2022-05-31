@@ -368,13 +368,13 @@ public class MapFragment extends Fragment {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (longPressedMarker != null) {
+                if (sharedLocationmarker != null) {
                     map.getOverlays().remove(sharedLocationmarker);
                 }
                 if (active) {
                     LocationSharing locationSharing = dataSnapshot.getValue(LocationSharing.class);
                     GeoPoint sharedPoint = new GeoPoint(locationSharing.getLatitud(), locationSharing.getLongitud());
-                    sharedLocationmarker = createMarker(sharedPoint, "Ubicacion aliado", null, R.drawable.ic_baseline_person_pin_circle_24);
+                    sharedLocationmarker = createMarker(sharedPoint, "Ubicacion aliado", null, org.osmdroid.bonuspack.R.drawable.person);
                     map.getOverlays().add(sharedLocationmarker);
                 }
             }
