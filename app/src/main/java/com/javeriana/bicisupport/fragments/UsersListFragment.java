@@ -73,6 +73,7 @@ public class UsersListFragment extends Fragment {
             Bundle bundle = new Bundle();
             bundle.putString("cloudToken", usersList.get(position).getCloudToken());
             bundle.putString("destinyName", usersList.get(position).getName());
+            bundle.putString("userLocalId", usersList.get(position).getLocalId());
             chatFragment.setArguments(bundle);
 
             fragmentTransaction.replace(R.id.fragmentContainerView, chatFragment);

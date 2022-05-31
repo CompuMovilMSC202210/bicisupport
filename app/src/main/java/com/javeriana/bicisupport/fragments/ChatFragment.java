@@ -26,12 +26,25 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.javeriana.bicisupport.R;
 import com.javeriana.bicisupport.adapters.MensajeAdapter;
+import com.javeriana.bicisupport.models.BEMessage;
+import com.javeriana.bicisupport.models.FirebaseChat;
+import com.javeriana.bicisupport.models.FirebaseMessage;
 import com.javeriana.bicisupport.models.Mensaje;
+import com.javeriana.bicisupport.models.UserList;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ChatFragment extends Fragment {
@@ -47,6 +60,9 @@ public class ChatFragment extends Fragment {
 
     String cloudToken;
     String destinyName;
+    String userLocalId;
+    String localId;
+    private DatabaseReference mDatabase;
 
     SharedPreferences prefs;
     RequestQueue requestQueue;
@@ -96,6 +112,7 @@ public class ChatFragment extends Fragment {
         mensaje = root.findViewById(R.id.cmensajec);
         btnsend = root.findViewById(R.id.send);
         listamensaje = root.findViewById(R.id.lmensajesc);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         Bundle args = this.getArguments();
         prefs = getActivity().getSharedPreferences(this.getString(R.string.app_name), Context.MODE_PRIVATE);
@@ -103,7 +120,10 @@ public class ChatFragment extends Fragment {
         if (args != null) {
             cloudToken = args.getString("cloudToken");
             destinyName = args.getString("destinyName");
+            userLocalId = args.getString("userLocalId");
         }
+
+        getMessages(root);
 
         MensajeAdapter msgAdapter = new MensajeAdapter(mensajes, this.getContext());
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(root.getContext());
@@ -123,10 +143,17 @@ public class ChatFragment extends Fragment {
         return root;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        listenChanges(this.getView());
+    }
+
     private void sendNotification(String message, View view) {
         String name = prefs.getString("userName", "");
+        localId = prefs.getString("localId", "");
 
-        String baseSendNotificationUrl = "https://bici-support-api.herokuapp.com/api/v1/notifications";
+        String baseSendNotificationUrl = "https://bici-support-api.herokuapp.com/api/v1/chat";
         requestQueue = Volley.newRequestQueue(view.getContext());
 
         StringRequest request = new StringRequest(Request.Method.POST, baseSendNotificationUrl,
@@ -140,11 +167,89 @@ public class ChatFragment extends Fragment {
                 params.put("token", cloudToken);
                 params.put("title", String.format("Nuevo mensaje de %s", name));
                 params.put("msg", message);
+                params.put("sender", localId);
+                params.put("destinatary", userLocalId);
                 return params;
             }
         };
 
         requestQueue.add(request);
+    }
+
+    private void getMessages(View view) {
+        String name = prefs.getString("userName", "");
+        localId = prefs.getString("localId", "");
+
+        String baseSendNotificationUrl = "https://bici-support-api.herokuapp.com/api/v1/chat/id";
+        requestQueue = Volley.newRequestQueue(view.getContext());
+
+        Type listType = new TypeToken<ArrayList<BEMessage>>() {
+        }.getType();
+
+        StringRequest request = new StringRequest(Request.Method.POST, baseSendNotificationUrl,
+                response -> {
+                    List<BEMessage> messages;
+                    messages = new Gson().fromJson(response, listType);
+                    mensajes = new ArrayList<>();
+                    for (BEMessage m : messages) {
+                        String emisor = m.getStatus().equals("received") ? destinyName : name;
+                        Mensaje mensaje1 = new Mensaje(m.getMsg(), emisor);
+                        mensajes.add(mensaje1);
+                        MensajeAdapter msgAdapter = new MensajeAdapter(mensajes, this.getContext());
+                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext());
+                        listamensaje.setLayoutManager(layoutManager);
+                        listamensaje.setItemAnimator(new DefaultItemAnimator());
+                        listamensaje.setAdapter(msgAdapter);
+                    }
+                },
+                error -> Log.e("Notificacion", error.getMessage())) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("sender", localId);
+                params.put("destinatary", userLocalId);
+                return params;
+            }
+        };
+
+        requestQueue.add(request);
+    }
+
+    public void listenChanges(View view) {
+        String name = prefs.getString("userName", "");
+        mDatabase.child("/chat").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        FirebaseChat chat = snapshot.getValue(FirebaseChat.class);
+                        assert chat != null;
+                        if ((chat.getSenderId().equals(localId) && chat.getDestinataryId().equals(userLocalId))
+                                || (chat.getSenderId().equals(userLocalId) && chat.getDestinataryId().equals(localId))) {
+                            if (!chat.getMessages().isEmpty()) {
+                                mensajes = new ArrayList<>();
+                                for (FirebaseMessage m : chat.getMessages()) {
+                                    String emisor = m.getSender().equals(localId) ? name : destinyName;
+                                    Mensaje mensaje1 = new Mensaje(m.getMsg(), emisor);
+                                    mensajes.add(mensaje1);
+                                    MensajeAdapter msgAdapter = new MensajeAdapter(mensajes, view.getContext());
+                                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(view.getContext());
+                                    listamensaje.setLayoutManager(layoutManager);
+                                    listamensaje.setItemAnimator(new DefaultItemAnimator());
+                                    listamensaje.setAdapter(msgAdapter);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.e("Error", "loadPost:onCancelled", databaseError.toException());
+            }
+        });
     }
 
 }
